@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  min-height: 15em; /* Altura mínima da viewport */
+  background-color: rgba(57, 101, 182, 0.836);
+}
+
+.estilizar {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  height: 15em; /* Altura total da viewport, ajuste conforme necessário */
+  width: auto;
+  background-color: rgba(57, 101, 182, 0.836);
+
+  .custom-dialog-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(0, 0, 0); /* Cor do título, ajuste conforme necessário */
+  }
+
+  .custom-dialog-content {
+    font-size: 18px;
+    color: rgb(48, 48, 48); /* Cor do conteúdo, ajuste conforme necessário */
+    margin-top: 16px; /* Espaçamento superior */
+  }
+
+  .custom-dialog-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .custom-dialog-close {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

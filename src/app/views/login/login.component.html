@@ -1,0 +1,16 @@
+
+  <div class="form-box">
+    <form class="form">
+        <span class="title">Login</span>
+        <span class="subtitle">Entre com as suas credenciais</span>
+        <div class="form-container">
+          <input type="text" name="usuario" class="input" placeholder="Usuario" [(ngModel)]="usuario">
+          <input type="password" name="senha" class="input" placeholder="Senha" [(ngModel)]="senha">
+        </div>
+        <button (click)="login(usuario, senha)">Entrar</button>
+    </form>
+    <div class="form-section form">
+      <p>Não tem cadastro?  </p>
+      <button (click)="redirect()">Cadastre-se</button>
+    </div>
+    </div>

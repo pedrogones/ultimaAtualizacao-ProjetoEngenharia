@@ -1,0 +1,27 @@
+<body>
+  <section class="parte-de-cima">
+    <div class="inf-inicial">
+        <img src="assets\medico1.jpg" alt="imagem de perfil">
+        <label for="nome" class="nome"><strong>Nome do medico</strong></label>
+    </div>
+    <div class="botoes">
+      <button id="lista-de-pacientes" (click)="redirectListaDePacientes()">Lista de pacientes</button>
+        <button id="bReceita" (click)="redirectCadReceita()">Cadastrar receita</button>
+        <button id="bProntuario" (click)="redirectPront()">Cadastrar prontuário</button>
+        <button id="bConsulta">Gerenciar consultas</button>
+        <div class="botoesEntrarCadastrar">
+          <button mat-button [matMenuTriggerFor]="menu" id="bSeusPacientes" style="margin-left: 20px;">Seus pacientes</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let paciente of pacientes" (click)="redirectPerfilMeuPaciente(paciente)">{{ paciente.nome }}</button>
+          </mat-menu>
+        </div>
+    </div>
+</section>
+<section class="parte-de-baixo">
+    <div>
+        <label for="nome">Nome: {{nomeMedico}}</label>
+        <label for="idade">Idade: {{idadeMedico}}</label>
+        <label for="area-de-atuacao">Área de atuação: {{areaAtuacao}}</label>
+    </div>
+</section>
+</body>

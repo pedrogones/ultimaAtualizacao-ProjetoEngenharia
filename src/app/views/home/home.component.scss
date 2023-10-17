@@ -1,0 +1,56 @@
+/* Estilizando o overlay do diálogo personalizado */
+.custom-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para o overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilizando o conteúdo do diálogo personalizado */
+.custom-dialog {
+  background-color: #5787ceb9;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Estilizando o título do diálogo personalizado */
+.dialog-title {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+/* Estilizando o conteúdo do diálogo personalizado */
+.dialog-content {
+  font-size: small;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Estilizando os botões do diálogo personalizado */
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.stylebtn {
+  padding: 10px 20px;
+  background-color: #071b72;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.stylebtn:hover {
+  background-color: #6396cc;
+}

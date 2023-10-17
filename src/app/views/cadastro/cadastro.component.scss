@@ -1,0 +1,199 @@
+/* Estilização personalizada para a mat-toolbar */
+.custom-toolbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  /* Centraliza horizontalmente */
+  align-items: center;
+  /* Centraliza verticalmente */
+  height: 64px;
+  /* Altura da barra (ajuste conforme necessário) */
+  background-color: #3157df;
+  /* Cor de fundo da barra (opcional) */
+  color: #fff;
+  /* Cor do texto (opcional) */
+  padding: 0 16px;
+  /* Espaçamento interno (opcional) */
+
+}
+.gridList{
+  display: inline-block;
+  width: 50%; /* 50% da largura do container para a coluna da grade */
+  vertical-align: top; /* Alinhe a parte superior dos elementos */
+
+}
+mat-grid-tile {
+  background: lightblue;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.invisible-button {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border: none;
+}
+
+/* Estilo para o título centralizado */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #eeeaea;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.button-bar {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+}
+/* Reset de estilos padrão */
+.Mbody, h1, label, input, button {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+.inputMat{
+  border: none;
+}
+/* Estilo da página */
+.Mbody {
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden; /* Remova as barras de rolagem */
+}
+.colorInput{
+  background-color: #00026b98;
+}
+body{
+  width: 100%;
+  height: 100%;
+  background-color: #c6d0f3e1;
+}
+/* Estilo do formulário */
+.informações {
+  background-color: #5787ceb9;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: left;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  justify-content: center;
+  width: 400px;
+  margin: 20px;
+  margin-top: 20px;
+  overflow: hidden; /* Remova as barras de rolagem */
+}
+/* Estilo do título */
+.titulo {
+  text-align: center;
+  color: #333;
+}
+
+/* Estilo das labels */
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Estilo dos campos de entrada */
+input[type="text"],[type="password"] {
+  width: 95%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo dos checkboxes */
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Estilo dos botões */
+.button-container {
+  display: flex;
+  justify-content: center; /* Distribui os botões igualmente no espaço disponível */
+}
+
+.bSalvar, .bCancelar {
+  padding: 10px 20px;
+  background-color: #071b72;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+height: auto;
+  margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+
+.bCancelar {
+  background-color: #ec8787;
+}
+/* Estilo para o cartão de login */
+
+.textGrid{
+  color: var(--e-global-color-1bf4a29);
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+  word-spacing: 0;
+}/* Estilo do cartão de login */
+.login-card {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; /* Remova as barras de rolagem */
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}

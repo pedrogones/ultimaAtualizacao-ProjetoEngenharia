@@ -1,0 +1,60 @@
+
+<body>
+  <div class="login-container">
+    <div class="informações">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label for="nome">Nome:</mat-label>
+          <input matInput placeholder="Digite seu nome" id="nome" name="nome" [(ngModel)]="nome">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="idade">Idade:</mat-label>
+          <input matInput placeholder="Digite sua idade" id="idade" name="idade" [(ngModel)]="idade">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Sexo:</mat-label>
+          <input matInput #inputElement placeholder="Selecione seu sexo:" id="sexo" name="sexo"
+                 [formControl]="myControl"
+                 [matAutocomplete]="auto"
+                 (input)="filter(inputElement)"
+                 (focus)="filter(inputElement)">
+          <mat-autocomplete requireSelection #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Data de Nascimento - dd/mm/aaaa</mat-label>
+          <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" id="email"
+            name="email" [(ngModel)]="email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Por favor, insira um endereço de e-mail válido
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            O email é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="senha">Senha:</mat-label>
+          <input matInput placeholder="Digite sua senha" type="password" id="senha" name="senha" [(ngModel)]="senha">
+        </mat-form-field>
+      </form>
+    </div>
+
+  </div>
+  <div class="button-container">
+    <button class="bSalvar" (click)="fazerCadastro()">Salvar</button>
+    <button class="bCancelar" (click)="redirectHome()">Cancelar</button>
+  </div>
+  <div class="gridList">
+  </div>
+</body>

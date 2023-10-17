@@ -1,0 +1,214 @@
+html, body{
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.div-principal{
+  padding-left: 100px;
+}
+
+.barraSuperior{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background-color: #ffffff; /* Cor de fundo da div */
+  padding: 15px; /* Espaçamento interno para o conteúdo */
+  /* Adicione outros estilos conforme necessário */
+}
+
+.informacoes{
+  float: left;
+}
+
+.botoesEntrarCadastrar{
+  float: right;
+  padding-right: 90px;
+}
+.bCadastrar{
+  background-color: #071b72;
+  color: #f5f4f4;
+}
+
+.bEntrar, .bCadastrar {
+  border-radius: 50px; /* Para criar uma forma arredondada */
+  padding: 15px 40px 15px 20px; /* Adapte o preenchimento conforme necessário */
+  cursor: pointer;
+  font-size: 15px;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Adicione uma borda com transparência para o botão Entrar */
+  &:hover{
+    background-color: #dadada;
+  }
+}
+.bEntrar {
+  color: #071b72;
+  border-width: 0.5px; /* Torna a borda do botão Entrar mais fina */
+  background-color: #f5f4f4;
+}
+button {
+  margin-right: 8px;
+}
+
+
+.bEntrar::before {
+  content: ""; /* Cria um elemento pseudo antes do conteúdo do botão */
+  background-image: url(./assets/pessoa75.png);
+  background-size: 35px 35px; /* Tamanho do ícone */
+  border-radius: 100%;
+  background-color: #071b72;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 50%; /* Alinha o ícone verticalmente ao centro do botão */
+  right: 3px; /* Define a margem direita para posicionar o ícone */
+  transform: translateY(-50%); /* Corrige a posição vertical do ícone */
+}
+
+
+
+.inf-inicio{
+  color: rgb(25, 25, 117);
+  font-size: 20px;
+  margin-left: 150px;
+  cursor: pointer;
+}
+
+.inf-beneficios{
+  color: rgb(25, 25, 117);
+  font-size: 20px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+
+.inf-depoimentos{
+  color: rgb(25, 25, 117);
+  font-size: 20px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+
+.inf-inicio, .inf-beneficios, .inf-depoimentos {
+  font-size: 16px;
+  color: rgb(25, 25, 117);
+  cursor: pointer;
+  border-bottom: 2px solid transparent; /* Adiciona uma borda invisível no início */
+  background-color: #dadada00;
+  border: none;
+  &:hover {
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid rgb(25, 25, 117); /* Adiciona a borda colorida ao passar o mouse */
+    }
+}
+
+.conteudo-inicio{
+  margin-left: 150px;
+  margin-top: 40px;
+  left: 0;
+  background-color: #ffffff; /* Cor de fundo da div */
+  padding: 15px; /* Espaçamento interno para o conteúdo */
+  /* Adicione outros estilos conforme necessário */
+}
+
+.conteudo-inicio-texto{
+  font-size:25px;
+  color: rgb(25, 25, 117);
+  padding-bottom: 30px;
+}
+
+
+.quadrado {
+  border-radius: 10%;
+  width: 190px;
+  height: 240px;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 1px;
+  float: left;
+  border: 1px solid #dadada;
+  padding: auto;
+}
+
+.quadrado-imagem {
+  float: left;
+  width: 50%; /* Define o tamanho da imagem (ajuste conforme necessário) */
+  padding: 10px; /* Espaço ao redor da imagem */
+}
+
+.styleIcon{
+  background-size: cover; /* Ajuste o tamanho da imagem de acordo com sua necessidade */
+  width: 75px; /* Largura do elemento */
+  height: 75px; /* Altura do elemento */
+
+}
+
+.quadrado-texto {
+  font-weight:bold;
+  font-size: 15px;
+  color: rgb(25, 25, 117);color: rgb(25, 25, 117);
+  float: left;
+  width: 60%; /* Define o tamanho do texto (ajuste conforme necessário) */
+  padding: 10px; /* Espaço ao redor do texto */
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.styleIcon{
+  background-size: cover; /* Ajuste o tamanho da imagem de acordo com sua necessidade */
+  width: 75px; /* Largura do elemento */
+  height: 75px; /* Altura do elemento */
+
+}
+//inicio
+.iconePrancheta{
+  background-image: url("./assets/prancheta75.png");
+}
+.iconeCoracao{
+  background-image: url("./assets/coracao75.png");
+}
+.iconePessoa{
+  background-image: url("./assets/pessoa75.png");
+}
+.iconeLocal{
+  background-image: url("./assets/locali75.png");
+}
+//Beneficos
+.iconeRemoto{
+  background-image: url("./assets/remoto.png");
+}
+.iconeRecepcionista{
+  background-image: url("./assets/recepcionista75.png");
+}
+.iconeEficiencia{
+  background-image: url("./assets/eficiencia.png");
+}
+.iconeGerenciamento{
+  background-image: url("./assets/gerenciamento.png");
+}
+//depoimentos
+.iconeMedico{
+  background-image: url("./assets/medico.jpeg");
+  border-radius: 100px;
+}
+.iconeDonaMaria{
+  background-image: url("./assets/donaMaria.jpeg");
+  border-radius: 100px;
+}
+.iconeSeuJoao{
+  background-image: url("./assets/seuJoao.jpeg");
+  border-radius: 100px;
+}
+.iconeMenina{
+  background-image: url("./assets/menina.png");
+  border-radius: 100px;
+}
+.iconeMedico1{
+  background-image: url("./assets/medico1.jpg");
+  border-radius: 100px;
+}
+.iconeMedico75{
+  background-image: url("./assets/medico75.jpg");
+  border-radius: 100px;
+}
