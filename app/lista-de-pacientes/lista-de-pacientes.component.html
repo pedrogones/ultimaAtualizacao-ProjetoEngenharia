@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <body>
+    <section class="parte-de-cima">
+      <h1>Lista de pacientes</h1>
+    </section>
+    <section class="inf">
+      <div>
+        <table id="tabela">
+          <tr>
+            <th class="nome">Nome</th>
+            <th class="idade">Idade</th>
+            <th class="sexo">Sexo</th>
+          </tr>
+          <tr>
+            <td>Arthur fonseca</td>
+            <td>45 anos</td>
+            <td>Masculino</td>
+            <td><button>Remover</button></td>
+          </tr>
+        </table>
+
+
+
+      </div>
+    </section>
+    <section class="bt">
+      <button id="adicionar-paciente" (click)="adicionarPaciente()">Adicionar paciente</button>
+      <button>Voltar</button>
+    </section>
+
+    <section id="modal" class="modal">
+      <div class="modal-content">
+        <label for="lNome" class="lNome">Nome:</label>
+        <input type="text" class="lNome" id="nome">
+        <label for="lIdade" class="lIdade">Idade</label>
+        <input type="text" class="lIdade" id="lIdade">
+        <label for="lSexo" class="lSexo">Sexo:</label>
+        <input type="text" class="lSexo" id="lSexo">
+        <button (click)="adicionar()">Adicionar</button>
+        <button id="fechar-modal" (click)="fecharModal()">Fechar</button>
+      </div>
+    </section>
+
+  </body>
+</html>

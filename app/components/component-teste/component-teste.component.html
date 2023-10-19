@@ -1,0 +1,32 @@
+<body class="bodyScrool">
+
+  <div class="login-container">
+    <div class="informações">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label for="nome">Nome:</mat-label>
+          <input matInput placeholder="Digite seu nome" id="nome" name="nomeRemedio" [(ngModel)]="nomeRemedio">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="idade">Idade:</mat-label>
+          <input matInput placeholder="Digite sua idade" id="idade" name="idade" [(ngModel)]="idade">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="usuario">Usuário (login):</mat-label>
+          <input matInput placeholder="Digite seu nome" id="usuario" name="usuario" [(ngModel)]="usuario">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="senha">Senha:</mat-label>
+          <input matInput placeholder="Digite sua senha" type="password" id="senha" name="senha" [(ngModel)]="senha">
+        </mat-form-field>
+      </form>
+    </div>
+
+    </div>
+    <div class="button-container">
+      <button class="bSalvar" (click)="submit()">Salvar</button>
+      <button class="bCancelar" (click)="back()">Cancelar</button>
+    </div>
+  <div class="gridList">
+  </div>
+  </body>

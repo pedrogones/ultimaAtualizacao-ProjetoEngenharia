@@ -1,0 +1,84 @@
+<body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <section class="parte-de-cima">
+    <div class="inf-inicial">
+      <img src="assets\medico1.jpg" alt="imagem de perfil">
+      <label for="nome" class="nome"><strong>Nome do medico</strong></label>
+    </div>
+    <div class="botoes">
+      <button class="butonStyle" id="lista-de-pacientes" (click)="redirectListaDePacientes()">Lista de pacientes</button>
+      <button class="butonStyle" id="bReceita" (click)="redirectCadReceita()">Cadastrar receita</button>
+      <button class="butonStyle" id="bProntuario" (click)="redirectPront()">Cadastrar prontuário</button>
+      <button class="butonStyle" id="bConsulta" (click)="mostrarCardGerenciarConsultas = true">Gerenciar consultas</button>
+      <div class="botoesEntrarCadastrar">
+        <button class="butonStyle" mat-button [matMenuTriggerFor]="menu" id="bSeusPacientes" style="margin-left: 20px;">Seus
+          pacientes</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let paciente of pacientes" (click)="redirectPerfilMeuPaciente(paciente)">{{
+            paciente.nome }}</button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="card modal" *ngIf="mostrarCardGerenciarConsultas">
+      <div class="tools modal-content">
+        <div style="align-content: center;">
+          <button class="butonStyle" (click)="mostrarCardGerenciarConsultas = false" style="background-color: crimson; color:black;">
+
+            <i class="fas fa-times"></i> <!-- Ícone de fechar -->
+          </button>
+
+        </div>
+        <div class="card__content" style="justify-content: center;">
+          <div class="div-gerenciaA textFormat">
+            <p>Consultas de Hoje - dia: {{ dateToday | date: 'dd/MM/yyyy' }}</p>
+            <ul class="lista">
+              <li *ngFor="let consulta of consultas">
+                {{ consulta.data | date: 'HH:mm' }} - {{ consulta.paciente }}
+              </li>
+            </ul>
+          </div>
+          <div class="div-gerenciaB textFormat">
+            <p>Marque aui os dias e horários que voê está disponível:</p>
+            <div class="selectDate">
+              <mat-form-field style="width: 100%;">
+                <mat-label>Selecione a data:</mat-label>
+                <input matInput [matDatepicker]="picker" (dateInput)="onDateSelected($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="dias-Buton">
+              <div class="dias">
+                <form [formGroup]="disponibilidadeForm" class="disponibilidade">
+                  <div class="checkbox-list">
+                    <mat-checkbox (change)="onCheckboxChange('8 horas')">8 horas</mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange('9 horas')">9 horas</mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange('10 horas')">10 horas</mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange('11 horas')">11 horas</mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange('14 horas')">14 horas</mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange('15 horas')">15 horas</mat-checkbox>
+                    <mat-checkbox (change)="onCheckboxChange('16 horas')">16 horas</mat-checkbox>
+                  </div>
+                  </form>
+              </div>
+
+              <div class="butonEnviar">
+                <button class="butonStyle"(click)="enviar()">Enviar</button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="parte-de-baixo">
+    <div>
+      <label for="nome">Nome: {{nomeMedico}}</label>
+      <label for="idade">Idade: {{idadeMedico}}</label>
+      <label for="area-de-atuacao">Área de atuação: {{areaAtuacao}}</label>
+    </div>
+  </section>
+</body>

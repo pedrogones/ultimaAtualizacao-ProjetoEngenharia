@@ -1,0 +1,81 @@
+/* Reset de estilos padrão */
+.Mbody, h1, label, input, button {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo da página */
+.Mbody {
+ // background-image: url('sua-imagem-de-fundo.jpg'); /* Substitua 'sua-imagem-de-fundo.jpg' pelo caminho da sua imagem de fundo */
+  background-size: cover; /* Para cobrir toda a área do body */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  margin: 0; /* Remova as margens do body */
+}
+
+/* Estilo do formulário */
+.informações {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: left;
+  width: 800px;
+  margin: 20px; /* Adicione margens para afastar a div da borda do body */
+}
+
+/* Estilo do título */
+.titulo {
+  text-align: center;
+  color: #333;
+}
+
+/* Estilo das labels */
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Estilo dos campos de entrada */
+input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo dos checkboxes */
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Estilo dos botões */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Distribui os botões igualmente no espaço disponível */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bCancelar {
+  background-color: #ec8787;
+}
+/* styles.css ou styles.scss */
+.readonly-radio {
+  pointer-events: none; /* Impede interações do usuário */
+  opacity: 0.7; /* Reduz a opacidade para indicar somente leitura */
+}
+

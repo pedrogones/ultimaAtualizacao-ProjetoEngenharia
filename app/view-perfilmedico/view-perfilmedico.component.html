@@ -1,0 +1,98 @@
+<body class="geral">
+  <div class="lado1">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image iconeMedico75" src="medico75.jpg"></div>
+        <mat-card-title>Dr. João Silva</mat-card-title>
+        <mat-card-subtitle>Clínico Geral</mat-card-subtitle>
+        <mat-card-actions class="btnsMargin">
+          <button class="custom-btn btn-1" (click)="agendarConsultaClick()">Agendar sua Consulta</button>
+          <button class="custom-btn btn-1" (click)="verReservaClick()">Ver reservas</button>
+        </mat-card-actions>
+      </mat-card-header>
+      <img mat-card-image class="iconeMedico1" src="medico1.jpg">
+      <mat-card-content>
+        <p class="style-text">
+          Dr. João Silva é um médico dedicado à saúde e ao bem-estar dos seus pacientes.
+          Ele possui uma vasta experiência no tratamento de diversas condições médicas
+          e está comprometido em fornecer o melhor atendimento possível.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="agendarConsulta"  class="lado2">
+    <form class="form">
+      <p class="title">Agende aqui a sua consulta</p>
+      <p class="message">Preencha abaixo os campos e agende a sua consulta</p>
+      <div class="flex">
+        <label>
+          <input required="" placeholder="" type="text" class="input"  name="nome" [(ngModel)]="nome">
+          <span>Nome</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" name="sobrenome" [(ngModel)]="sobrenome">
+          <span>Sobrenome</span>
+        </label>
+      </div>
+
+      <label>
+        <input required="" placeholder="" type="email" class="input"  name="email"[(ngModel)]="email">
+        <span>Email</span>
+      </label>
+
+      <label>
+        <div class="flex" style="width: 373px;">
+          <span class="input"> Escolha uma data<br>
+            <input type="date" id="data" name="data" class="input" name="data" [(ngModel)]="data" style="width: auto; margin-top:20px;" >
+          </span>
+
+          <label for="horario" class="input">Escolha um horário de início:
+            <select id="horario" name="horario" [(ngModel)]="horario" class="input">
+              <option value="08:00">08:00</option>
+              <option value="09:00">09:00</option>
+              <option value="10:00">10:00</option>
+              <option value="13:00">13:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+
+              <!-- Adicione mais opções de horário conforme necessário -->
+            </select>
+          </label>
+
+        </div>
+      </label>
+      <label>
+        <mat-form-field class="input">
+          <mat-label>Motivos da sua consulta</mat-label>
+          <mat-select [(value)]="selectedExame">
+            <mat-option></mat-option>
+            <mat-option [value]="option.value" *ngFor="let option of exameTypes">{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </label>
+      <button class="submit" (click)="sendInfo()">Enviar Solicitação de Agendamento</button>
+    </form>
+  </div>
+  <div *ngIf="verReserva" class="lado2">
+    <form class="form">
+      <p class="title">Reservas do Dr. Joao Silva</p>
+      <p class="message">Disponibilidades de atendimento do Dr. João Silva</p>
+      <div class="reservas-container">
+        <div *ngFor="let dia of semanaOutubro | keyvalue" class="reservas-card">
+          <div class="reservas-data">{{ dia.key }}</div>
+          <div class="horas-disponibilidade">
+            <div *ngFor="let horaDisponivel of dia.value | keyvalue" class="reservas-hora">
+              {{ horaDisponivel.key }} horas {{ horaDisponivel.value }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+</body>
