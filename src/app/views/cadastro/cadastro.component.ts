@@ -53,8 +53,6 @@ export class CadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private dialog: MatDialog,
-    private pacienteservice: PacienteService,
-
     private authService: AuthService
   ) {
     this.filteredOptions = this.options.slice();

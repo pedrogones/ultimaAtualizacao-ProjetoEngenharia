@@ -52,6 +52,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {NgFor, AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/gerenciar-consultas.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ViewPerfilmedicoComponent,
     ProntuarioMedicoComponent,
     ComponentTesteComponent,
-    PerfilPacienteComponent
+    PerfilPacienteComponent,
+    GerenciarConsultasComponent
   ],
   imports: [
     BrowserModule,

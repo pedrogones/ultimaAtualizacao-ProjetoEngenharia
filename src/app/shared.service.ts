@@ -61,6 +61,9 @@ export class SharedService {
   redirectListaDePacientes(){
     this.router.navigate(['homeMedico/listaDePacientes'], {relativeTo: this.route})
   }
+  redirectGerenciarConsultas(){
+    this.router.navigate(['homeMedico/gerenciarConsultas'], {relativeTo: this.route})
+  }
 
   delay(ms: number) {
     return new Promise<void>(resolve => {

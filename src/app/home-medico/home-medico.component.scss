@@ -121,6 +121,138 @@
   border-radius: 5px;
   padding: 5px 5px;
 }
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.lista{
+  margin-left: 25px;
+}
+
+.butonEnviar {
+  align-self: flex-end; /* Alinha o botão à direita */
+  margin-top: 10px; /* Espaçamento entre os checkboxes e o botão */
+}
+.action-button{
+  cursor: pointer;
+  margin-left:15px;
+}
+
+.action-button {
+  margin-top: 10px; /* Ajuste a margem conforme necessário para criar espaço entre os checkboxes e o botão */
+}
+
+.div-gerenciaB, .div-gerenciaA{
+  background-color: #F8FBFE;
+  position: relative;
+  border-radius: 2%;
+}
+.card__content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* Distribui as divs lado a lado */
+  border-bottom: 5% solid transparent; /* Adiciona uma borda de 5% na parte inferior */
+}
+.textFormat{
+
+  font-weight: bold;
+  font-size: 15px;
+  color: rgb(25, 25, 117);
+  color: rgb(25, 25, 117);
+  float: left;
+  width: 60%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.div-gerenciaA, .div-gerenciaB {
+  width: 45%; /* Tamanho inicial de 45% para ambas as divs */
+  padding: 15px; /* Adiciona um preenchimento interno de 15px em ambas as divs */
+  border-top: 1px solid #000; /* Adiciona uma borda superior a cada div */
+}
 
 
 
+.card {
+  margin: 0 auto;
+  background-color: #1c53eb98;
+  border-radius: 8px;
+  z-index: 1;
+ }
+
+/* CSS para o modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* CSS para o conteúdo interno do modal */
+.modal-content {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #3e62c5f5;
+  width: 30%;
+  height: 40vh;
+  margin: 100px auto; /* Centralize o modal verticalmente */
+  padding: 20px;
+}
+
+ .tools {
+  display: flex;
+margin-top: 5%;
+  width: 1000px;
+  height: 500px;
+  align-items: center;
+  padding: 9px;
+ }
+
+
+
+ .box {
+  display: inline-block;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  padding: 1px;
+  border-radius: 50%;
+ }
+
+ .selectDate {
+  width: 100%;
+}
+
+.dias-Buton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dias {
+  flex-grow: 1; /* Ocupa o espaço disponível restante */
+}
+//botao enfeitado
+.butonStyle{
+  font-size: 17px;
+  padding: 0.5em 2em;
+  border: transparent;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  background: dodgerblue;
+  color: white;
+  border-radius: 4px;
+ }
+
+ .butonStyle:hover {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+ }
+
+ .butonStyle:active {
+  transform: translate(0em, 0.2em);
+ }

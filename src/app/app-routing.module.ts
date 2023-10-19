@@ -14,6 +14,7 @@ import { PerfilPacienteComponent } from './home-medico/perfil-paciente/perfil-pa
 import { ListaDePacientesComponent } from './lista-de-pacientes/lista-de-pacientes.component';
 import { CadReceitaComponent } from './cad-receita/cad-receita.component';
 import { ProntuarioComponent } from './prontuario/prontuario.component';
+import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/gerenciar-consultas.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: 'homeMedico/perfilMeuPaciente', component: PerfilPacienteComponent},
   {path: 'homeMedico/prontuario', component: ProntuarioComponent},
   {path: 'homeMedico/cadReceita', component: CadReceitaComponent},
-  {path: 'homeMedico/listaDePacientes', component: ListaDePacientesComponent}
+  {path: 'homeMedico/listaDePacientes', component: ListaDePacientesComponent},
+  {path: 'homeMedico/gerenciarConsultas', component: GerenciarConsultasComponent}
 
 ];
 
