@@ -4,6 +4,7 @@ import { PacienteService } from '../pacienteService'; // Importa o serviço de p
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { DisponibilidadeService } from './disponibilidade-service.service';
+import { Paciente } from '../pacientes/paciente';
 
 @Component({
   selector: 'app-home-medico',
@@ -86,7 +87,7 @@ enviar() {
 
 
 
-  nomeMedico = 'Chimbinha'; // Nome do médico
+  nomeMedico = 'João Silva'; // Nome do médico
   idadeMedico = '45 anos'; // Idade do médico
   areaAtuacao = 'Cardiologia'; // Área de atuação do médico
 
@@ -98,24 +99,107 @@ enviar() {
     this.sharedService.redirectListaDePacientes(); // Redireciona para a página de lista de pacientes
   }
 
-  pacientes = [
-    { nome: "Pedro Targino Gomes", idade: 30, sexo: "Masculino" },
-    { nome: "Arthur Vieira", idade: 25, sexo: "Masculino" },
-    { nome: "João Victor", idade: 28, sexo: "Masculino" },
-    { nome: 'Cássio Vittori', idade: 35, sexo: "Masculino" }
+ // Use objetos Paciente compatíveis com a interface:
+pacientes: Paciente[] = [
+  {
+    _id: 'id-1',
+    name: "Pedro Targino Gomes",
+    usuario: 'usuario-1',
+    idade: '30',
+    alergico: 'Alérgico a dipirona monohidratada',
+    doencas:'não há',
+    historicoFamiliar: 'Diabtes Tipo 1',
+    email: 'email-1',
+    rg: '12345-67',
+    sexo: "Masculino",
+    url_img:"pedroPaciente.png"
+  },
+  {
+    _id: 'id-1',
+    name: "Arthur Vieira",
+    usuario: 'usuario-2',
+    idade: '38',
+    alergico: 'Alérgico a parecetamol',
+    doencas:'Hipertensão',
+    historicoFamiliar: 'Diabtes Tipo 1',
+    email: 'email-1',
+    rg: '12345-67',
+    sexo: "Masculino",
+    url_img:"arthurPaciente.png"
+  },
+  {
+    _id: 'id-2',
+    name: "João Victor",
+    usuario: 'usuario-3',
+    idade: '28',
+    alergico: 'Não',
+    doencas: 'Asma',
+    historicoFamiliar: 'Nenhum histórico de doença',
+    email: 'email-3',
+    rg: '98765-43',
+    sexo: "Masculino",
+    url_img: "joaoPaciente.png"
+  },
+  {
+    _id: 'id-3',
+    name: "Cássio Vittori",
+    usuario: 'usuario-4',
+    idade: '35',
+    alergico: 'Alérgico a penicilina',
+    doencas: 'Diabetes Tipo 2',
+    historicoFamiliar: 'Diabetes Tipo 1 e Hipertensão',
+    email: 'email-4',
+    rg: '56789-01',
+    sexo: "Masculino",
+    url_img: "cassioPaciente.png"
+  },
+  {
+    _id: 'id-4',
+    name: "Geraldo Ferreira",
+    usuario: 'usuario-5',
+    idade: '45',
+    alergico: 'Não',
+    doencas: 'Hipertensão e Colesterol Alto',
+    historicoFamiliar: 'Nenhum histórico de doenças familiares',
+    email: 'email-5',
+    rg: '54321-98',
+    sexo: "Masculino",
+    url_img: "geraldoPaciente.png"
+  },
+  {
+    _id: 'id-5',
+    name: "Ícaro Oliveira",
+    usuario: 'usuario-6',
+    idade: '32',
+    alergico: 'Alérgico a amoxicilina',
+    doencas: 'Asma',
+    historicoFamiliar: 'Asma e Diabetes Tipo 2',
+    email: 'email-6',
+    rg: '12398-76',
+    sexo: "Masculino",
+    url_img: "icaroPaciente.png"
+  }
+
+
   ]; // Array de pacientes, meramente exemplar, será ta,bem puxado e populado do banco de dados
 
   redirectPront() {
-    this.sharedService.redirectProntuario1(); // Redireciona para a página de prontuário
+    this.sharedService.redirectProntuarioCadastrado(); // Redireciona para a página de prontuário
   }
 
   redirectGerenciarConsultas() {
     this.sharedService.redirectGerenciarConsultas(); // Redireciona para a página de gerenciamento de consultas
   }
 
+  redirectMedicacoes(){
+    this.sharedService.redirectMedicacoes()
+  }
+
   // Função para definir o paciente selecionado e redirecionar para a tela do paciente
-  redirectPerfilMeuPaciente(paciente: any) {
-    this.pacienteService.setPacienteSelecionado(paciente); // Define o paciente selecionado usando o serviço de paciente
+  redirectPerfilMeuPaciente(paciente: Paciente) {
+    this.pacienteService.setPacienteSelecionado(paciente);
+    const nomePaciente = this.pacienteService.getPacienteNome(); // Chame o método get para obter o nome
+    console.log("TESTE: "+nomePaciente);
     this.sharedService.redirectMeuPaciente(paciente); // Redireciona para a página do paciente selecionado
   }
 }

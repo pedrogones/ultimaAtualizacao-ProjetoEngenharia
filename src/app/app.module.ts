@@ -35,7 +35,6 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { HomeMedicoComponent } from './home-medico/home-medico.component';
 import { HomePacienteComponent } from './home-paciente/home-paciente.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
-import { ProntuarioComponent } from './prontuario/prontuario.component';
 import { VerificaMedicoComponent } from './verifica-medico/verifica-medico.component';
 import { ViewPerfilmedicoComponent } from './view-perfilmedico/view-perfilmedico.component';
 import { CadastroComponent } from './views/cadastro/cadastro.component';
@@ -53,6 +52,14 @@ import {map, startWith} from 'rxjs/operators';
 import {NgFor, AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/gerenciar-consultas.component';
+import { ProntuarioCadastradoComponent } from './home-medico/prontuario-cadastrado/prontuario-cadastrado.component';
+import { ReceitaCadastradaComponent } from './home-medico/receita-cadastrada/receita-cadastrada.component';
+import { MedicamentosListaComponent } from './medicamentos-lista/medicamentos-lista.component';
+import { Medicacoes2Component } from './views/medicacoes2/medicacoes2.component';
+import { CuidadosComponent } from './views/medicacoes2/cuidados/cuidados.component';
+import { Cuidados1Component } from './views/medicacoes/cuidados1/cuidados1.component';
+import { Medicacoes3Component } from './views/medicacoes3/medicacoes3.component';
+import { Cuidados3Component } from './views/medicacoes3/cuidados3/cuidados3.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +69,6 @@ import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/g
     HomeComponent,
     ConfirmationDialogComponent,
     PacientesComponent,
-    ProntuarioComponent,
     VerificaMedicoComponent,
     HomeMedicoComponent,
     HomePacienteComponent,
@@ -71,7 +77,15 @@ import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/g
     ProntuarioMedicoComponent,
     ComponentTesteComponent,
     PerfilPacienteComponent,
-    GerenciarConsultasComponent
+    GerenciarConsultasComponent,
+    ProntuarioCadastradoComponent,
+    ReceitaCadastradaComponent,
+    MedicamentosListaComponent,
+    Medicacoes2Component,
+    CuidadosComponent,
+    Cuidados1Component,
+    Medicacoes3Component,
+    Cuidados3Component
   ],
   imports: [
     BrowserModule,

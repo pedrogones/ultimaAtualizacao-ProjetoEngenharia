@@ -12,6 +12,12 @@ import { ConfirmationDialogComponent } from './sharedDialog/confirmation-dialog/
 })
 
 export class SharedService {
+  redirectNext(arg0: string) {
+    this.router.navigate(['homeMedico/medicacoes'+arg0], { relativeTo: this.route });
+  }
+  redirectCuidados(page: string){
+    this.router.navigate(['homeMedico/medicacoes'+page+'/cuidados'], { relativeTo: this.route });
+  }
   private pacientes = [
     { nome: "Pedro Targino Gomes", idade: 30, sexo: "Masculino" },
     { nome: "Arthur Vieira", idade: 25, sexo: "Masculino" },
@@ -65,6 +71,16 @@ export class SharedService {
     this.router.navigate(['homeMedico/gerenciarConsultas'], {relativeTo: this.route})
   }
 
+  redirectProntuarioCadastrado(){
+    this.router.navigate(['homePaciente/prontuarioCadastrado'], {relativeTo: this.route})
+  }
+
+  redirectReceitaCadastrada(){
+    this.router.navigate(['homePaciente/receitaCadastrada'], {relativeTo: this.route})
+  }
+  redirectMedicacoes(){
+    this.router.navigate(['homeMedico/medicacoes1'], {relativeTo: this.route})
+  }
   delay(ms: number) {
     return new Promise<void>(resolve => {
       setTimeout(resolve, ms);

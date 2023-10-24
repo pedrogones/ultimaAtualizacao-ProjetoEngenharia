@@ -3,21 +3,22 @@
   <section class="parte-de-cima">
     <div class="inf-inicial">
       <img src="assets\medico1.jpg" alt="imagem de perfil">
-      <label for="nome" class="nome"><strong>Nome do medico</strong></label>
+      <label for="nome" class="nome"><strong>{{nomeMedico}} </strong></label>
     </div>
     <div class="botoes">
-      <button class="butonStyle" id="lista-de-pacientes" (click)="redirectListaDePacientes()">Lista de pacientes</button>
-      <button class="butonStyle" id="bReceita" (click)="redirectCadReceita()">Cadastrar receita</button>
+            <button class="butonStyle" id="bReceita" (click)="redirectCadReceita()">Cadastrar receita</button>
       <button class="butonStyle" id="bProntuario" (click)="redirectPront()">Cadastrar prontuário</button>
+      <button class="butonStyle" id="bProntuario" (click)="redirectMedicacoes()">Ver Medicações</button>
       <button class="butonStyle" id="bConsulta" (click)="mostrarCardGerenciarConsultas = true">Gerenciar consultas</button>
       <div class="botoesEntrarCadastrar">
-        <button class="butonStyle" mat-button [matMenuTriggerFor]="menu" id="bSeusPacientes" style="margin-left: 20px;">Seus
-          pacientes</button>
+        <button class="butonStyle" mat-button [matMenuTriggerFor]="menu" id="bSeusPacientes" style="margin-left: 20px;">Seus pacientes</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngFor="let paciente of pacientes" (click)="redirectPerfilMeuPaciente(paciente)">{{
-            paciente.nome }}</button>
+          <button mat-menu-item *ngFor="let paciente of pacientes" (click)="redirectPerfilMeuPaciente(paciente)">
+            {{ paciente.name }} <!-- Exibe o nome do paciente -->
+          </button>
         </mat-menu>
       </div>
+
     </div>
     <div class="card modal" *ngIf="mostrarCardGerenciarConsultas">
       <div class="tools modal-content">

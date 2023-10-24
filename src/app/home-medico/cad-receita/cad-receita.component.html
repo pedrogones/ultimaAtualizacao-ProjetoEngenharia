@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<body>
+
+  <section class="principal">
+    <section class="logo">
+        <h1>Receita médica</h1>
+    </section>
+
+    <section class="informacoes">
+        <h3>Informações do paciente</h3>
+        <form class="example-form forma">
+          <mat-form-field  class="example-full-width">
+            <mat-label  for="nome">Nome:</mat-label>
+            <input matInput placeholder="Digite seu nome" id="nome" name="nome">
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label  for="idade">Idade:</mat-label>
+            <input matInput placeholder="Digite sua idade" id="idade" name="idade">
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label for="sexo">Sexo:</mat-label>
+            <input matInput placeholder="Digite seu sexo" type="text" id="senha" name="senha">
+          </mat-form-field>
+        </form>
+
+
+        <h3>Descrição da receita</h3>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="nome">Descrição de medicamento:</mat-label>
+          <input matInput placeholder="Digite seu nome" id="nome" name="nome">
+        </mat-form-field>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="nome">Orientações:</mat-label>
+          <input matInput placeholder="Digite seu nome" id="nome" name="nome">
+        </mat-form-field>
+    </section>
+
+    <section class="botoes">
+        <button>Salvar</button>
+        <button (click)="redirectPerfilMedico()">Cancelar</button>
+    </section>
+</section>
+</body>
+</html>

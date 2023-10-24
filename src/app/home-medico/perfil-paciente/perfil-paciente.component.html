@@ -1,23 +1,28 @@
+<body>
 
-<div class="divMain" style="flex-direction: column;">
+  <section class="sEsquerda">
 
-  <section class="loader">
+      <div class="card">
+          <div class="card-border-top"></div>
+          <div class="imagem">
+              <img [src]="url_img" alt="imagem do paciente">
+              <button (click)="redirectHomeMedico()">Voltar</button>
+          </div>
+        </div>
 
-    <div class="slider" style="--i:0">
-    </div>
-    <div class="slider" style="--i:1">
-    </div>
-    <div class="slider" style="--i:2">
-    </div>
-    <div class="slider" style="--i:3">
-    </div>
-    <div class="slider" style="--i:4">
-    </div>
   </section>
 
+  <section class="sDireita">
+      <h2>Informações pessoais</h2>
 
+      <label for="nome" class="nome"><strong>Nome do Paciente: {{nomePaciente}}</strong></label>
+      <label for="idade" class="idade"><strong>Idade: {{idadePaciente}} anos</strong></label>
+      <label for="sexo" class="sexo"><strong>Sexo: {{sexoPaciente}} </strong></label>
+      <label for="rg" class="rg"><strong>Rg: {{rgPaciente}} </strong></label>
+      <h2>informações médicas</h2>
+      <label for="doenca"><strong>Doença: {{doencaPaciente}} </strong></label>
+      <label for="alergia"><strong>Alergias: {{alergiasPaciente}} </strong></label>
+      <label for="historico-familiar"><strong>Histórico familiar: {{historicoPaciente}} </strong></label>
+  </section>
 
-<br>
-<br>
-<p class="text" style="font-family: 'Times New Roman', Times, serif;">Tela em construção</p>
-</div>
+</body>
