@@ -1,9 +1,8 @@
 <body>
   <button class="menu-button" (click)="voltar()" style="margin-top: 15px; margin-left:10px">Voltar</button>
   <div class="botoesNavigation">
-    <!---->
-  <button class="menu-button" (click)="message()"> anterior </button>
-  <button class="menu-button" (click)="redirectNext('2')">próximo </button>
+    <button class="menu-button" (click)="redirectNext('2')">anterior</button>
+    <button class="menu-button" (click)="message('Não há mais remédios na base')">próximo</button>
   </div>
   <div class="allContainer">
     <div class="container">
@@ -13,9 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="spaceBar">
-
-    </div>
+    <div class="spaceBar"></div>
     <div class="menu">
       <div class="menu-item"></div>
       <div class="menu-buttons">
@@ -38,10 +35,8 @@
       </div>
     </div>
     <div class="info-content">
-
       <div class="info-description">{{conteudoMecanismoDeAcao}}</div>
     </div>
-    <!---->
     <div class="info-box">
       <div class="info-header">
         <div class="info-title">Apresentação</div>
@@ -69,17 +64,14 @@
             </div>
           </div>
           <div class="dosage-type">
-            <span class="dosage-title">Para mais informações sobre apresentações com indicações distintas, acesse:
-            </span>
+            <span class="dosage-title">Para mais informações sobre apresentações com indicações distintas, acesse:</span>
             <div class="oral-suspension">
-              <a href="{{linkRemedio}}" target="_blank" class="dosage-title">Topico</a>
+              <a [href]="linkRemedio" target="_blank" class="dosage-title">Tópico</a>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-    <!---->
     <div class="info-box">
       <div class="info-header">
         <div class="info-title">Uso Clínico</div>
@@ -100,14 +92,11 @@
         <span class="dosage-description">{{usoClinico3}}</span>
       </div>
     </div>
-    <!---->
     <div class="info-box">
       <div class="info-header">
-        <div class="info-title">Posologia
-        </div>
+        <div class="info-title">Posologia</div>
         <span style="color: rgb(121, 121, 14);" class="title">{{posologia}}</span>
       </div>
     </div>
   </div>
-
 </body>

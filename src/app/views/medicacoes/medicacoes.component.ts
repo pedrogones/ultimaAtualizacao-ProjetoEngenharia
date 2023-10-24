@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from 'src/app/shared.service';
 
 @Component({
   selector: 'app-medicacoes',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./medicacoes.component.scss']
 })
 export class MedicacoesComponent {
+  constructor(private sharedService: SharedService){
+
+  }
   //campos para preencher com nome e informações do medicamento
   nomeRemedio = 'Nimesulida'
   classeConteudo = 'Anti-inflamatório não esteroidal'
@@ -20,4 +24,17 @@ export class MedicacoesComponent {
   usoClinico3='Torcicolo;'
   posologia='Posologia de acordo com a bula da Anvisa ou orientação do fabricante. Para a consuta em cada doença, consulte uso clínico'
 
+
+message(){
+this.sharedService.dialogConfirm('Não ha paginas anteriores', false)
+}
+redirectNext(rota: string){
+this.sharedService.redirectNext(rota);
+}
+voltar(){
+  this.sharedService.redirectHomeMedico()
+}
+cuidados(){
+  this.sharedService.redirectCuidados('1')
+}
 }

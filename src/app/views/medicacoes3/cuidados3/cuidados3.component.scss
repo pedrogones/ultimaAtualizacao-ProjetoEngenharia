@@ -10,15 +10,6 @@ $text-color: #151516;
 $font-size: 32px;
 $font-family: "DM Sans", sans-serif;
 $font-weight: 700;
-.botoesNavigation {
-  top: 0; /* Posiciona no canto superior */
-  left: 0; /* Posiciona no canto esquerdo */
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px; /* Adicione espaço para melhorar a aparência */
-  box-sizing: border-box;
-}
 
 .container {
   width: 100%;
@@ -132,7 +123,15 @@ body {
   word-wrap: break-word;
   /* Outros estilos de texto podem ser adicionados aqui, se necessário */
 }
-
+.botoesNavigation {
+  top: 0; /* Posiciona no canto superior */
+  left: 0; /* Posiciona no canto esquerdo */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px; /* Adicione espaço para melhorar a aparência */
+  box-sizing: border-box;
+}
 /* Estilos da caixa de informações */
 .info-box {
   align-self: stretch;

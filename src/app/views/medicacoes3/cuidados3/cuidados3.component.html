@@ -1,0 +1,131 @@
+<body>
+  <button class="menu-button" (click)="voltar()" style="margin-top: 15px; margin-left:10px">Voltar</button>
+   <div class="botoesNavigation">
+    <!---->
+  <button class="menu-button" (click)="redirectNext('1')"> anterior </button>
+  <button class="menu-button" (click)="message('Não há mais remédios na base')">próximo </button>
+  </div>
+  <div class="allContainer">
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <span class="logo-text">{{nomeRemedio}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="spaceBar">
+
+    </div>
+    <div class="menu">
+      <div class="menu-item"></div>
+      <div class="menu-buttons">
+        <div class="menu-button" id="button1" (click)="principal()" style="background-color:#F0F0F0; color: rgb(0, 1, 59);">Principal</div>
+        <div class="menu-button" id="button3" (click)="cuidados()" style="background-color: rgb(0, 1, 59); color: white">Cuidados</div>
+      </div>
+    </div>
+    <div class="spaceBar"></div>
+    <div class="info-box">
+      <div class="info-header">
+        <div class="info-title">Efeitos Adversos</div>
+      </div>
+    </div>
+    <div class="info-content">
+      <div class="info-description">{{classeConteudo}}</div>
+    </div>
+    <div class="info-content">
+
+      <div class="info-description">{{conteudoMecanismoDeAcao}}</div>
+    </div>
+    <div class="info-box">
+      <div class="info-header">
+        <div class="info-title">Contraindicações</div>
+      </div>
+    </div>
+    <div class="info-content">
+
+      <div class="info-description">{{contrIndicacao1}}</div>
+    </div>
+    <div class="info-content">
+
+      <div class="info-description">{{contrIndicacao2}}</div>
+    </div>
+
+    <div class="info-content">
+
+      <div class="info-description">{{contrIndicacao3}}</div>
+    </div>    <!---->
+
+    <!---->
+    <div class="info-box">
+      <div class="info-header">
+        <div class="info-title">Advertências</div>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia7}}</span>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia1}}</span>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia2}}</span>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia3}}</span>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia4}}</span>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia5}}</span>
+      </div>
+    </div>
+    <div class="dosage-type">
+      <div class="oral-suspension">
+        <span class="dosage-description">{{advertencia6}}</span>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="info-header">
+        <div class="info-title">Geral</div>
+      </div>
+    </div>
+    <div class="info-content">
+      <div class="container">
+        <div class="dosage-info">
+          <div class="dosage-type">
+            <span class="dosage-description">{{geral1}}</span>
+          </div>
+          <div class="dosage-type">
+            <span class="dosage-title">Para mais informações sobre apresentações com indicações distintas, acesse:
+            </span>
+            <div class="oral-suspension">
+              <a href="{{linkRemedio}}" target="_blank" class="dosage-title">Topico</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!---->
+    <div class="info-box">
+      <div class="info-header">
+        <div class="info-title">Posologia
+        </div>
+        <span style="color: rgb(121, 121, 14);" class="title">{{posologia}}</span>
+      </div>
+    </div>
+  </div>
+
+</body>

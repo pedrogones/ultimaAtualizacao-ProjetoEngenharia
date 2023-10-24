@@ -4,8 +4,12 @@ export interface Paciente{
   usuario: string;
   idade: string;
   alergico: string;
-  contato: string;
-  infoadd: string;
+  doencas: string;
+  historicoFamiliar: string;
   email: string;
-  senha: string;
+  rg: string;
+  sexo:string;
+  url_img:string;
+
 }
+
