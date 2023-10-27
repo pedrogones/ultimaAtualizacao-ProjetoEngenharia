@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import { Data } from '@angular/router';
+import { SharedService } from '../shared.service';
 
 
 interface ExameType {
@@ -18,102 +20,99 @@ interface DiaDisponibilidade {
   templateUrl: './view-perfilmedico.component.html',
   styleUrls: ['./view-perfilmedico.component.scss']
 })
-export class ViewPerfilmedicoComponent {
-  agendarConsulta=true;
-  verReserva=false;
-  nome!:string;
-  sobrenome!: string;
-  email!:string;
-  data!:string;
-  horario!: string;
+export class ViewPerfilmedicoComponent implements OnInit {
+  constructor(private sharedService: SharedService) {
 
+  }
+  ngOnInit(): void {
+    this.strDataHoje = this.dataHoje.getFullYear() + '-' + (this.dataHoje.getMonth() + 1) + '-' + this.dataHoje.getDate()
+  }
+
+  agendarConsulta = true;
+  verReserva = false;
+  nome!: string;
+  sobrenome!: string;
+  email!: string;
+  data!: string;
+  horario!: string;
+  medico!:string
+  strDataHoje!: string;
 
 
   exameTypes: ExameType[] = [
-    {value: 'Check-up de Rotina-0', viewValue: 'Check-up de Rotina'},
-    {value: 'Doenças Crônicas-1', viewValue: 'Doenças Crônicas'},
-    {value: 'Dor Persistente-2', viewValue: 'Dor Persistente'},
-    {value: 'Check-up de Rotina-3', viewValue: 'Check-up de Rotina'},
-    {value: 'Problemas Respiratórios-4', viewValue: 'Problemas Respiratórios'},
-    {value: 'Infecções Recorrentes-5', viewValue: 'Infecções Recorrentes'},
-    {value: 'Sintomas Gastrointestinais-6', viewValue: 'Sintomas Gastrointestinais'},
-    {value: 'Problemas de Pele-7', viewValue: 'Problemas de Pele'},
-    {value: 'Problemas de Visão-8', viewValue: 'Problemas de Visão'},
+    { value: 'Check-up de Rotina', viewValue: 'Check-up de Rotina' },
+    { value: 'Doenças Crônicas', viewValue: 'Doenças Crônicas' },
+    { value: '', viewValue: '' },
+    { value: 'Dor Persistente', viewValue: 'Dor Persistente' },
+    { value: 'Check-up de Rotina', viewValue: 'Check-up de Rotina' },
+    { value: 'Problemas Respiratórios', viewValue: 'Problemas Respiratórios' },
+    { value: 'Infecções Recorrentes', viewValue: 'Infecções Recorrentes' },
+    { value: 'Sintomas Gastrointestinais', viewValue: 'Sintomas Gastrointestinais' },
+    { value: 'Problemas de Pele', viewValue: 'Problemas de Pele' },
+    { value: 'Problemas de Visão', viewValue: 'Problemas de Visão' },
   ];
-  //para fins didáticos, vamos deixar alguns dias e horarios ja fixos, para alguns médicos (teremos 2, no maximo);
-  semanaOutubro: DiaDisponibilidade = {
-    '11 de outubro': {
-      8: 'disponível',
-      9: 'indisponível',
-      10: 'disponível',
-      12: 'indisponível',
-      13: 'disponível',
-      14: 'disponível',
-      15: 'indisponível',
-      16: 'indisponível'
-    },
-    '12 de outubro': {
-      8: 'disponível',
-      9: 'disponível',
-      10: 'disponível',
-      12: 'indisponível',
-      13: 'indisponível',
-      14: 'indisponível',
-      16: 'disponível'
-    },
-    '13 de outubro': {
-      8: 'disponível',
-      9: 'disponível',
-      10: 'disponível',
-      12: 'indisponível',
-      13: 'disponível',
-      14: 'disponível',
-      15: 'disponível',
-      16: 'disponível'
-    },
-    '14 de outubro': {
-      8: 'disponível',
-      9: 'disponível',
-      10: 'disponível',
-      12: 'indisponível',
-      13: 'disponível',
-      14: 'disponível',
-      15: 'disponível',
-      16: 'disponível'
-    },
-    '15 de outubro': {
-      8: 'disponível',
-      9: 'disponível',
-      10: 'disponível',
-      12: 'indisponível',
-      13: 'disponível',
-      14: 'disponível',
-      15: 'disponível',
-      16: 'disponível'
-    }
-  };
-
   selectedExame = this.exameTypes[2].value;
 
-  agendarConsultaClick(){
-    this.agendarConsulta=true;
-    this.verReserva=false;
-  }
-  verReservaClick(){
-    this.verReserva=true;
-    this.agendarConsulta=false;
-  }
+  medicoTypes: string[] = [
+    'Dr. João Silva',
+    'Dra. Maria Oliveira',
+    'Dr. Carlos Santos',
+    // esse array será o que vai ser puxado do banco de dados
 
-  sendInfo(){
-    if(this.nome==null&&this.email==null&&this.sobrenome==null&&this.data==null&&this.horario==null&&this.selectedExame==null){
-     alert("preencha todos os campos")
-    }else{
-    console.log(this.nome, this.sobrenome);
-    console.log(this.email);
-    console.log(this.data, this.horario);
-    console.log(this.selectedExame)
+  ];
+
+  selectedMedico: string = this.medicoTypes[0]; // Seleciona o primeiro médico por padrão
+  agendarConsultaClick() {
+    this.agendarConsulta = true;
+    this.verReserva = false;
   }
-}
+  verReservaClick() {
+    this.verReserva = true;
+    this.agendarConsulta = false;
+  }
+  dataHoje = new Date();
+  verificaDiaValido(data: string): boolean {
+    if (this.strDataHoje >= data) {
+      return true
+    } else {
+      return false
+
+    }
+  }
+  sendInfo() {
+    if (
+      this.selectedMedico === '' ||
+      this.nome === '' ||
+      this.email === '' ||
+      this.sobrenome === '' ||
+      this.data === '' ||
+      this.horario === '' ||
+      this.selectedExame === ''
+    ) {
+      // Se todos os campos estiverem em branco, exiba a mensagem de erro.
+      this.sharedService.dialogConfirm("Preencha todos os campos", false);
+    } else if (this.verificaDiaValido(this.data)) {
+      this.sharedService.dialogConfirm('Você não pode marcar uma consulta nesse dia', false)
+    } else {
+      this.verificaDiaValido(this.data)
+      this.horario = this.horario + ':00'
+      console.log(this.nome, this.sobrenome);
+      console.log(this.email);
+      console.log(this.dataHoje);
+      console.log(this.data, this.horario);
+      console.log(this.selectedExame)
+      this.sharedService.dialogConfirm('Solicitação enviada', true);
+
+      //isso aqui abaixo reseta os campos preenchidos após a submissao das info
+      //é necessário que tu envie para o banco de dados antes daqui
+      this.nome = ''
+      this.sobrenome = ''
+      this.email = ''
+      this.data = ''
+      this.horario = ''
+      this.selectedExame=''
+    }
+  }
 
 
 

@@ -1,16 +1,25 @@
 body {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; /* Usamos viewport height para ocupar 100% da altura da tela */
+  margin: 0; /* Removemos as margens padrão do body */
+  background-color: #f0f0f0; /* Cor de fundo de plano de fundo se desejar */
+}
+.container {
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  /* Outros estilos para o conteúdo da div */
 }
-
 .example-card {
-  max-width: 600px;
+ width: 100%;
   height: 100%;
 }
 
 .lado1{
-  margin-right: 150px;
+width: 100%;
 }
 .style-text {
   margin-top: 25px;
@@ -36,10 +45,10 @@ body {
 }
 
 
-
 .lado2 {
-  margin-top: 5%;
-  margin-left: 150px;
+  display: flex; /* Adicione display flex */
+  flex-direction: column;
+  align-items: center; /* Alinhe ao centro verticalmente */
 }
 
 .custom-btn {
@@ -61,7 +70,10 @@ body {
     4px 4px 5px 0px rgba(0, 0, 0, .1);
   outline: none;
 }
-
+.teste{
+  display: flex;
+  margin-left: 30%;
+}
 .btn-1 {
   background: rgb(6, 14, 131);
   background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%, rgba(12, 25, 180, 1) 100%);
@@ -78,12 +90,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 350px;
+  max-width: 100%; /* Use a largura máxima de 100% */
   background-color: #fff;
   padding: 20px;
   border-radius: 20px;
   position: relative;
+  margin: 0 auto; /* Alinhe ao centro horizontalmente */
 }
+
 
 .title {
   font-size: 23px;
@@ -95,7 +109,11 @@ body {
   align-items: center;
   padding-left: 30px;
 }
+mat-card-header{
+  display: block;
+padding: 16px 16px 0;
 
+}
 .title::before,
 .title::after {
   position: absolute;
@@ -223,39 +241,4 @@ body {
   position: relative;
   background: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-}
-
-/* Estilização das reservas */
-.reservas-container {
-  display: flex;
-  justify-content: center;
-}
-
-.reservas-card {
-  flex-basis: calc(33.33% - 20px);
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 5px;
-  margin-right: 20px;
-}
-
-.reservas-data {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: rgb(6, 14, 131);
-}
-
-.horas-disponibilidade {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.reservas-hora {
-  flex-basis: calc(50% - 10px);
-  margin-right: 10px;
-  color: green;
-  margin-bottom: 5px;
-  background-color: #ddd;
-  padding: 5px 10px;
-  border-radius: 3px;
 }

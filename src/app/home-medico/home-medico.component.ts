@@ -5,6 +5,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { DisponibilidadeService } from './disponibilidade-service.service';
 import { Paciente } from '../pacientes/paciente';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-medico',
@@ -27,7 +28,6 @@ export class HomeMedicoComponent implements OnInit {
   }
 
   hora1!:any;
-
 
   dateToday  = new Date(); // Variável para armazenar a data do dia
   consultas: any[] = []; // Array para representar as consultas do dia
@@ -62,6 +62,9 @@ export class HomeMedicoComponent implements OnInit {
       this.selectDate = dataSelecionada.getDate() + '/' + month + '/' + dataSelecionada.getFullYear();
     }
   }
+
+
+
   onCheckboxChange(hour: string) {
     if (this.selectedHours.includes(hour)) {
       // Se a hora já estiver na lista, remova-a
@@ -71,22 +74,57 @@ export class HomeMedicoComponent implements OnInit {
       this.selectedHours.push(hour);
     }
   }
-// Função para pegar as horas selecionadas
-enviar() {
-    if (this.dateToday&&this.selectDate) {
-      this.sharedService.dialogConfirm("Atualização Realizada com Sucesso", true);
-      this.mostrarCardGerenciarConsultas = false; // Variável para controlar a exibição do card de gerenciar consultas
-      console.log("Data selecionada:", this.selectDate);
-      console.log("Horas selecionadas:", this.selectedHours);
-    } else {
-      this.sharedService.dialogConfirm("Selecione a data e horários", false);
+  mostrarInputPdf=false;
+  observacoes='';
+
+  handlePdfUpload() {
+    const fileInput = document.getElementById("pdfInput") as HTMLInputElement;
+    const file = fileInput.files; // Pega o primeiro arquivo selecionado (neste caso, um arquivo PDF)
+    if(file?.length==0){
+      this.sharedService.dialogConfirm("Selecione um arquivo", false)
+    } else if (file && this.observacoes == '') {
+      console.log('sem observacoes');
+      console.log(file);
+      
+    } else if (file && this.observacoes != '') {
+      console.log(file)
+      console.log('com observacoes');
+      // Aqui você pode adicionar a lógica para fazer o upload do PDF e processar as observações.
+      // Por exemplo, você pode chamar uma função de serviço para enviar os dados para o servidor.
+      // Ou qualquer outra ação que desejar realizar.
     }
   }
+  
+  enviarPdf(){
+    this.handlePdfUpload()
+  }
+  exitIpnut(){
+    this.mostrarInputPdf=false
+  }
+  enviar() {
+    if (this.selectDate&&this.selectedHours) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Define a hora para meia-noite
 
+      const selectedDateParts = this.selectDate.split('/');
+      const selectedDate = new Date(
+        +selectedDateParts[2],
+        +selectedDateParts[1] - 1,
+        +selectedDateParts[0]
+      );
 
-
-
-
+      if (selectedDate < today) {
+        this.sharedService.dialogConfirm("A data selecionada é menor que o dia de hoje.", true);
+      } else if (selectedDate.getTime() === today.getTime()) {
+        this.sharedService.dialogConfirm("Você não pode marcar uma consulta para hoje.", true);
+      } else {
+        this.sharedService.dialogConfirm("Consultas do dia "+this.selectDate+" atualizadas com sucesso", true);
+       this.mostrarCardGerenciarConsultas = false;
+      }
+    } else {
+      this.sharedService.dialogConfirm("Selecione a data", false);
+    }
+  }
   nomeMedico = 'João Silva'; // Nome do médico
   idadeMedico = '45 anos'; // Idade do médico
   areaAtuacao = 'Cardiologia'; // Área de atuação do médico

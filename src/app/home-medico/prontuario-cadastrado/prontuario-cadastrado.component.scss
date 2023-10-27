@@ -37,12 +37,16 @@ body{
   color: white;
   font-size: 30px;
 }
+.forma{
+  display: contents;
+  width: 50%;
+}
 
 .informacoes{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  width: 80%;
   height: auto;
 }
 
@@ -60,27 +64,6 @@ body{
   font-weight: 600;
 }
 
-.informacoes label, input{
-  margin-left: 100px;
-}
-
-.informacoes label{
-  margin-top: 20px;
-  font-weight: 600;
-}
-
-.informacoes input{
-  width: 50%;
-  padding: 5px 5px;
-  border: 2px solid #00005c;
-  border-radius: 5px;
-  background-color:darkgray;
-  font-weight: 600;
-}
-
-.informacoes input:last-child{
-  margin-bottom: 100px;
-}
 
 .botoes{
   display: flex;
@@ -114,3 +97,4 @@ body{
   border: 2px solid black;
   color: rgb(214, 214, 214);
 }
+

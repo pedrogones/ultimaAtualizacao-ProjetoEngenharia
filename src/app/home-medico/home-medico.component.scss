@@ -144,11 +144,7 @@
   margin-top: 10px; /* Ajuste a margem conforme necessário para criar espaço entre os checkboxes e o botão */
 }
 
-.div-gerenciaB, .div-gerenciaA{
-  background-color: #F8FBFE;
-  position: relative;
-  border-radius: 2%;
-}
+
 .card__content {
   display: flex;
   width: 100%;
@@ -167,8 +163,10 @@
   margin-top: 10px;
   margin-left: 10px;
 }
-.div-gerenciaA, .div-gerenciaB {
-  width: 45%; /* Tamanho inicial de 45% para ambas as divs */
+.div-gerenciaA {
+  background-color: #F8FBFE;
+  border-radius: 15px;
+  width: 85%; /* Tamanho inicial de 45% para ambas as divs */
   padding: 15px; /* Adiciona um preenchimento interno de 15px em ambas as divs */
   border-top: 1px solid #000; /* Adiciona uma borda superior a cada div */
 }
@@ -198,11 +196,12 @@
   display: flex;
   flex-direction: column;
   background-color: #3e62c5f5;
-  width: 30%;
-  height: 40vh;
-  margin: 100px auto; /* Centralize o modal verticalmente */
+  width: 80%; /* Defina a largura como 80% */
+  height: 80vh; /* Defina a altura como 80% da altura da tela */
+  margin: 10vh auto; /* Centralize verticalmente com margens superiores e inferiores */
   padding: 20px;
 }
+
 
  .tools {
   display: flex;

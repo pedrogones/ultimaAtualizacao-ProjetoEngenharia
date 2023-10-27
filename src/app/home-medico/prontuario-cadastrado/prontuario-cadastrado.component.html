@@ -6,29 +6,56 @@
 
     <section class="informacoes">
         <h3>Informações pessoais</h3>
-        <label for="nome" class="nome">Nome:</label>
-        <input type="text" id="nome" name="nome">
-        <label for="sexo" class="sexo">Sexo:</label>
-        <input type="text" id="sexo" name="sexo">
-        <label for="rg" class="rg">RG:</label>
-        <input type="text" id="rg" name="rg">
-        <label for="idade" class="idade">Idade:</label>
-        <input type="text" name="idade" id="idade">
-        <label for="contato" class="contato">Contato:</label>
-        <input type="phone" id="contato" name="contato">
+        <form class="example-form forma">
+          <mat-form-field  class="example-full-width">
+            <mat-label  for="nome">Nome:</mat-label>
+            <input matInput placeholder="Digite seu nome" id="nome" name="nome" [(ngModel)]="nomePaciente">
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label  for="idade">Idade:</mat-label>
+            <input matInput placeholder="Digite sua idade" id="idade" name="idade" [(ngModel)]="idadePaciente">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Sexo:</mat-label>
+            <input matInput #inputElement placeholder="Selecione seu sexo:" id="sexo" name="sexo"
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto"
+                   (input)="filter(inputElement)"
+                   (focus)="filter(inputElement)">
+            <mat-autocomplete requireSelection #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label for="contato">Contato:</mat-label>
+            <input matInput placeholder="Digite seu contato" type="text" id="contato" name="contato" [(ngModel)]="contatoPaciente">
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label for="rg">Rg:</mat-label>
+            <input matInput placeholder="Digite seu rg" type="text" id="rg" name="rg" [(ngModel)]="rgPaciente">
+          </mat-form-field>
+        </form>
 
         <h3>Informações médicas</h3>
-        <label for="doença" class="doença">Doença:</label>
-        <input type="text" id="doença" name="doença">
-        <label for="alergia" class="alergia">Alergia:</label>
-        <input type="text" id="alergia" name="alergia">
-        <label for="historico-familiar" class="historico-familiar">Histórico familiar de doenças:</label>
-        <input type="text" id="historico-familiar" name="historico-familiar">
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="doenca">Doença:</mat-label>
+          <input matInput placeholder="Insira aqui" id="doenca" name="doenca" [(ngModel)]="doencasPaciente">
+        </mat-form-field>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="alergias">Alergia:</mat-label>
+          <input matInput placeholder="Insira aqui" id="alergias" name="alergias" [(ngModel)]="alergiaPaciente">
+        </mat-form-field>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="historico">Histórico familiar de Doença:</mat-label>
+          <input matInput placeholder="Insira aqui" id="historico" name="historico" [(ngModel)]="historicoPaciente">
+        </mat-form-field>
     </section>
 
     <section class="botoes">
-        <button>Salvar</button>
-        <button>Cancelar</button>
+        <button (click)="enviar()" >Enviar</button>
+        <button (click)="redirectHomeMedico()">Cancelar</button>
     </section>
 </body>
 </html>

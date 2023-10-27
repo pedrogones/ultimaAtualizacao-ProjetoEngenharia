@@ -21,6 +21,7 @@ export class PerfilPacienteComponent implements OnInit {
 
 
   constructor(private pacienteService: PacienteService, private sharedService: SharedService) {} // Injeta o serviço de paciente
+
   ngOnInit() {
     // Recupere o paciente selecionado do serviço
     this.pacienteSelecionado = this.pacienteService.getPacienteSelecionado();
