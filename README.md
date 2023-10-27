@@ -41,3 +41,6 @@ abra na porta localhost:4200, e se deu certo, abriu a home do angular
 aí agora, tu vai baixar o arquivo do git, e pegar o src e substituir o do projeto angularClinical, que tu acabou de criar, pelo src do que está no Git
 n~]ao esqueca de pegar o proxy.conf.js e colocar lá junto das outras pastas (as .app, .spec, os package e etc) ele fica solto mesmo
 
+Após isso, 
+npm run start 
+para rodar o projeto
