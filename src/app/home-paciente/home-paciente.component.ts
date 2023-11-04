@@ -1,7 +1,41 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
+import { MatTableDataSource } from '@angular/material/table';
 
+//aqui serão as info dos pdfs q o medico envia, os 3 campos que precisam conter, no mínimo
+export interface Prescricoes {
+  name: string;
+  medico: string;
+  data: string;
+}
+//popular o array com os campos que virão do banco de dados
+const PDFS_PRESCRITOS: Prescricoes[] = [
+  {name: 'Remedio para gripe', medico: 'Mário Silva', data: '26/10/2022'},
+  {name: 'Remedio para o pé', medico: 'Ana Santos', data: '15/07/2021'},
+  {name: 'Remedio para dor de cabeça', medico: 'Carlos Ferreira', data: '03/05/2023'},
+  {name: 'Remedio para alergia', medico: 'Patricia Alves', data: '19/11/2020'},
+  {name: 'Remedio para tosse', medico: 'Ricardo Rodrigues', data: '07/09/2022'},
+  {name: 'Remedio para enjoo', medico: 'Isabel Ribeiro', data: '14/12/2021'},
+  {name: 'Remedio para dor nas costas', medico: 'Paulo Gonçalves', data: '22/08/2023'},
+  {name: 'Remedio para insônia', medico: 'Sandra Lima', data: '30/04/2019'},
+  {name: 'Remedio para dor de estômago', medico: 'João Martins', data: '12/03/2022'},
+  {name: 'Remedio para febre', medico: 'Mariana Sousa', data: '08/06/2020'}
+];
 
+//aqui serão as info dos pdfs q o medico envia, os 3 campos que precisam conter, no mínimo
+export interface Consultas {
+  motivo: string;
+  medico: string;
+  data: string;
+  hora: string;
+}
+//popular o array com os campos que virão do banco de dados
+const SUAS_CONSULTAS: Consultas[] = [
+  {motivo: 'Preciso me examinar por conta da... gripe', medico: 'Mário Silva', data: '26/10/2022', hora: '08:00'},
+  {motivo: 'Preciso me examinar por conta da... o pé', medico: 'Ana Santos', data: '15/07/2021', hora: '08:00'},
+  {motivo: 'Preciso me examinar por conta da... dor de cabeça', medico: 'Carlos Ferreira', data: '03/05/2023', hora: '08:00'},
+  {motivo: 'Preciso me examinar por conta da... alergia', medico: 'Patricia Alves', data: '19/11/2020', hora: '08:00'},
+ ];
 @Component({
   selector: 'app-home-paciente',
   templateUrl: './home-paciente.component.html',
@@ -10,26 +44,83 @@ import { SharedService } from '../shared.service';
 export class HomePacienteComponent implements OnInit {
   radioInicio!: HTMLInputElement; // Declare o tipo como HTMLInputElement ou null
   inicio: boolean = true;
+  observacao!:string;
   receita: boolean = false;
   prontuario: boolean = false;
+  suasConsultas:boolean=false;
+  mostrarMedicamentos:boolean =false;
+  exameUpload:boolean =false;
+
   constructor(private sharedService: SharedService) {
 
   }
+  medicoTypes: string[] = [
+    'Dr. João Silva',
+    'Dra. Maria Oliveira',
+    'Dr. Carlos Santos',
+    // esse array será o que vai ser puxado do banco de dados, aqui é mero exemplo
+  ];
+  selectedMedico: string = this.medicoTypes[0]; // Seleciona o primeiro médico por padrão
+
   ngOnInit(): void {
 
   }
+  displayedColumnsPdfs: string[] = [ 'name', 'medico', 'data'];
+  dataSourcePdfs = new MatTableDataSource(PDFS_PRESCRITOS);
+  displayedColumnsSuasConsultas: string[] = [ 'motivo', 'medico', 'data', 'hora'];
+  dataSourceSuasConsultas = new MatTableDataSource(SUAS_CONSULTAS);
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourcePdfs.filter = filterValue.trim().toLowerCase();
+  }
+  applyFilterConsulas(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceSuasConsultas.filter = filterValue.trim().toLowerCase();
+  }
+
+
   //função para lidar com as mudanças da div no feed
   onRadioChange(selectedOption: string) {
     // Quando um botão de rádio for alterado, desmarque os outros
     if (selectedOption === 'inicio') {
       this.receita = false;
       this.prontuario = false;
+      this.mostrarMedicamentos=false;
+      this.exameUpload=false;
+      this.suasConsultas=false;
     } else if (selectedOption === 'receita') {
       this.inicio = false;
       this.prontuario = false;
+      this.mostrarMedicamentos=false
+      this.exameUpload=false;
+      this.suasConsultas=false;
+
     } else if (selectedOption === 'prontuario') {
       this.inicio = false;
       this.receita = false;
+      this.exameUpload=false;
+      this.suasConsultas=false;
+      this.mostrarMedicamentos=false
+    }else if (selectedOption === 'mostrarMedicamentos'){
+      this.inicio = false;
+      this.receita = false;
+      this.prontuario=false
+      this.exameUpload=false;
+      this.suasConsultas=false;
+
+    }else if(selectedOption==='exameUpload'){
+      this.inicio = false;
+      this.receita = false;
+      this.prontuario=false;
+      this.suasConsultas=false;
+      this.mostrarMedicamentos=false;
+    }else{
+      this.inicio = false;
+      this.receita = false;
+      this.prontuario=false;
+      this.exameUpload=false;
+      this.mostrarMedicamentos=false;
     }
   }
   //funcão para redirecionar ao perfil do seu médico
@@ -83,6 +174,9 @@ export class HomePacienteComponent implements OnInit {
       indicacoes: 'Tratamento de enjoo ',
     }
   ];
+  logOut(){
+    this.sharedService.redirectHome()
+  }
 
   // listar aqui os campos do Prontuário do paciente:
   //-> Antecendentes Médicos:

@@ -11,6 +11,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 // Import other necessary modules for Angular Material components
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 // Importe outros módulos relacionados ao Angular Material, se necessário
@@ -52,7 +53,6 @@ import {map, startWith} from 'rxjs/operators';
 import {NgFor, AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/gerenciar-consultas.component';
-import { ProntuarioCadastradoComponent } from './home-medico/prontuario-cadastrado/prontuario-cadastrado.component';
 import { ReceitaCadastradaComponent } from './home-medico/receita-cadastrada/receita-cadastrada.component';
 import { MedicamentosListaComponent } from './medicamentos-lista/medicamentos-lista.component';
 import { Medicacoes2Component } from './views/medicacoes2/medicacoes2.component';
@@ -78,7 +78,6 @@ import { Cuidados3Component } from './views/medicacoes3/cuidados3/cuidados3.comp
     ComponentTesteComponent,
     PerfilPacienteComponent,
     GerenciarConsultasComponent,
-    ProntuarioCadastradoComponent,
     ReceitaCadastradaComponent,
     MedicamentosListaComponent,
     Medicacoes2Component,

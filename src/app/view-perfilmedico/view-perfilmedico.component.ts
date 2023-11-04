@@ -30,11 +30,12 @@ export class ViewPerfilmedicoComponent implements OnInit {
 
   agendarConsulta = true;
   verReserva = false;
-  nome!: string;
-  sobrenome!: string;
-  email!: string;
-  data!: string;
-  horario!: string;
+  nome: string | null = null;
+sobrenome: string | null = null;
+email: string | null = null;
+data: string | null = null;
+horario: string | null = null;
+
   medico!:string
   strDataHoje!: string;
 
@@ -51,7 +52,7 @@ export class ViewPerfilmedicoComponent implements OnInit {
     { value: 'Problemas de Pele', viewValue: 'Problemas de Pele' },
     { value: 'Problemas de Visão', viewValue: 'Problemas de Visão' },
   ];
-  selectedExame = this.exameTypes[2].value;
+  motivoExame = this.exameTypes[2].value;
 
   medicoTypes: string[] = [
     'Dr. João Silva',
@@ -72,47 +73,54 @@ export class ViewPerfilmedicoComponent implements OnInit {
   }
   dataHoje = new Date();
   verificaDiaValido(data: string): boolean {
-    if (this.strDataHoje >= data) {
-      return true
-    } else {
-      return false
+    const dataSelecionada = new Date(data);
+    const hoje = new Date();
 
+    // Verifique se a data selecionada é maior ou igual à data de hoje
+    if (dataSelecionada >= hoje) {
+      console.log(dataSelecionada + ' é maior ou igual a ' + hoje);
+      return false;
+    } else {
+      return true;
     }
   }
   sendInfo() {
     if (
       this.selectedMedico === '' ||
-      this.nome === '' ||
-      this.email === '' ||
-      this.sobrenome === '' ||
-      this.data === '' ||
-      this.horario === '' ||
-      this.selectedExame === ''
+      this.nome === null ||
+      this.sobrenome === null ||
+      this.email === null ||
+      this.data === null ||
+      this.horario === null ||
+      this.motivoExame === ''
     ) {
-      // Se todos os campos estiverem em branco, exiba a mensagem de erro.
+      // Se algum campo obrigatório estiver em branco, exiba a mensagem de erro.
       this.sharedService.dialogConfirm("Preencha todos os campos", false);
     } else if (this.verificaDiaValido(this.data)) {
-      this.sharedService.dialogConfirm('Você não pode marcar uma consulta nesse dia', false)
+      this.sharedService.dialogConfirm('Você não pode marcar uma consulta nesse dia', false);
     } else {
-      this.verificaDiaValido(this.data)
-      this.horario = this.horario + ':00'
+      this.horario = this.horario + ':00';
       console.log(this.nome, this.sobrenome);
       console.log(this.email);
       console.log(this.dataHoje);
       console.log(this.data, this.horario);
-      console.log(this.selectedExame)
+      console.log(this.motivoExame);
       this.sharedService.dialogConfirm('Solicitação enviada', true);
 
-      //isso aqui abaixo reseta os campos preenchidos após a submissao das info
-      //é necessário que tu envie para o banco de dados antes daqui
-      this.nome = ''
-      this.sobrenome = ''
-      this.email = ''
-      this.data = ''
-      this.horario = ''
-      this.selectedExame=''
+      // Isso aqui abaixo reseta os campos preenchidos após a submissão das informações
+      // É necessário que você envie para o banco de dados antes daqui
+      this.nome = null;
+      this.sobrenome = null;
+      this.email = null;
+      this.data = null;
+      this.horario = null;
+      this.motivoExame = '';
     }
   }
+  canelar(){
+    this.sharedService.redirectHomePaciente();
+  }
+
 
 
 

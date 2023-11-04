@@ -12,10 +12,8 @@ import { MedicacoesComponent } from './views/medicacoes/medicacoes.component';
 import { ViewPerfilmedicoComponent } from './view-perfilmedico/view-perfilmedico.component';
 import { PerfilPacienteComponent } from './home-medico/perfil-paciente/perfil-paciente.component';
 import { ListaDePacientesComponent } from './lista-de-pacientes/lista-de-pacientes.component';
-import { CadReceitaComponent } from './home-medico/cad-receita/cad-receita.component';
 import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/gerenciar-consultas.component';
 import { ReceitaCadastradaComponent } from './home-medico/receita-cadastrada/receita-cadastrada.component';
-import { ProntuarioCadastradoComponent } from './home-medico/prontuario-cadastrado/prontuario-cadastrado.component';
 import { MedicamentosListaComponent } from './medicamentos-lista/medicamentos-lista.component';
 import { Medicacoes2Component } from './views/medicacoes2/medicacoes2.component';
 import { CuidadosComponent } from './views/medicacoes2/cuidados/cuidados.component';
@@ -37,10 +35,8 @@ const routes: Routes = [
   {path: 'homePaciente/perfilMedico', component: ViewPerfilmedicoComponent},
   //{path: 'homeMedico/prontuario', component: ProntuarioMedicoComponent}, esse é o errado
   {path: 'homeMedico/perfilMeuPaciente', component: PerfilPacienteComponent},
-  {path: 'homeMedico/cadReceita', component: CadReceitaComponent},
   {path: 'homeMedico/listaDePacientes', component: ListaDePacientesComponent},
   {path: 'homeMedico/gerenciarConsultas', component: GerenciarConsultasComponent},
-  {path: 'homePaciente/prontuarioCadastrado', component: ProntuarioCadastradoComponent},
   {path: 'homePaciente/receitaCadastrada', component: ReceitaCadastradaComponent},
   {path: 'homeMedico/medicacoes1', component: MedicacoesComponent},
   {path: 'homeMedico/medicacoes2', component: Medicacoes2Component},

@@ -32,13 +32,12 @@
           </label>
 
 
-          <label>
-            <div class="flex" style="width: 373px;">
-              <span class="input"> Escolha uma data<br>
+            <div class="flex2" style="width: 373px;">
+              <label class="input"> Escolha uma data
                 <input type="date" id="data" name="data" class="input" name="data" [(ngModel)]="data" style="width: auto; margin-top:20px;" >
-              </span>
+              </label>
 
-              <label for="horario" class="input">Escolha um horário de início:
+              <label style="margin-left: 45px;" for="horario" >Escolha um horário de início:<br>
                 <select id="horario" name="horario" [(ngModel)]="horario" class="input">
                   <option value="08:00">08:00</option>
                   <option value="09:00">09:00</option>
@@ -48,24 +47,20 @@
                   <option value="15:00">15:00</option>
                   <option value="16:00">16:00</option>
                   <option value="17:00">17:00</option>
-
                   <!-- Adicione mais opções de horário conforme necessário -->
                 </select>
               </label>
-
             </div>
-          </label>
           <label>
             <mat-form-field class="input">
-              <mat-label>Motivos da sua consulta</mat-label>
-              <mat-select [(value)]="selectedExame">
-                <mat-option></mat-option>
-                <mat-option [value]="option.value" *ngFor="let option of exameTypes">{{ option.viewValue }}</mat-option>
-              </mat-select>
+              <mat-label>Digite aqui o motivo da sua consulta</mat-label>
+              <textarea matInput name="motivoExame" [(ngModel)]="motivoExame" [ngModelOptions]="{standalone: true}"></textarea>
             </mat-form-field>
           </label>
-
+        <div class="alinharBotoes">
           <button class="submit" (click)="sendInfo()">Enviar Solicitação de Agendamento</button>
+          <button  class="submit" (click)="canelar()">cancelar</button>
+        </div>
         </form>
       </div>
 

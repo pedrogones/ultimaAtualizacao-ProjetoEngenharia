@@ -17,7 +17,7 @@
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1); /* Adicione uma borda com transparência para o botão Entrar */
   &:hover{
-    background-color: #0075d4;
+    background-color: #191847 ;
   }
 }
 .bCadastrar {
@@ -31,11 +31,11 @@
   padding: 0;
   border: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:  sans-serif;
 }
 
 .parte-de-cima{
-  background-color: #00005c;
+  background-color: #ABABAB  ;
   width: 100%;
   height: 45vh;
   border-bottom: 2px solid #00005c;
@@ -62,15 +62,15 @@
 }
 
 .inf-inicial label{
-  color: white;
+  color: #191847 ;
   text-align: center;
   border-bottom: 2px solid white;
 }
 
 .botoes button{
-  color: #00005c;
+  color: #ffffff ;
   background-color: auto;
-  border-bottom: 2px solid #00005c;
+  border-bottom: 2px solid #191847 ;
   padding: 5px;
   border-radius: 10px;
   margin-left: 20px;
@@ -90,7 +90,7 @@
 .parte-de-baixo{
   background-color: rgba(212, 212, 212, 0.719);
   margin-top: 20px;
-  border-top: 2px solid #00005c;
+  border-top: 2px solid #ABABAB ;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,7 +98,7 @@
 }
 
 .parte-de-baixo div{
-  background-color: #00005c;
+  background-color: #ABABAB ;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -171,7 +171,10 @@
   border-top: 1px solid #000; /* Adiciona uma borda superior a cada div */
 }
 
-
+.nome{
+  color: #191847 ;
+  font-family: sans-serif;
+}
 
 .card {
   margin: 0 auto;
@@ -242,7 +245,7 @@ margin-top: 5%;
   padding: 0.5em 2em;
   border: transparent;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-  background: dodgerblue;
+  background: #191847 ;
   color: white;
   border-radius: 4px;
  }
@@ -255,3 +258,80 @@ margin-top: 5%;
  .butonStyle:active {
   transform: translate(0em, 0.2em);
  }
+ .Btn {
+  --black: #000000;
+  --ch-black: #141414;
+  --eer-black: #1b1b1b;
+  --night-rider: #2e2e2e;
+  --white: #ffffff;
+  --af-white: #f3f3f3;
+  --ch-white: #e1e1e1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: var(--af-white);
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: var(--night-rider);
+}
+/* text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: var(--night-rider);
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+.logOut{
+  margin-top: 55px;
+  margin-left: 85%;
+}
+/* hover effect on button width */
+.Btn:hover {
+  width: 125px;
+  border-radius: 5px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+  transform: translate(2px ,2px);
+}
