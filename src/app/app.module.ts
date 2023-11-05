@@ -41,7 +41,6 @@ import { ViewPerfilmedicoComponent } from './view-perfilmedico/view-perfilmedico
 import { CadastroComponent } from './views/cadastro/cadastro.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
-import { MedicacoesComponent } from './views/medicacoes/medicacoes.component';
 import { ProntuarioMedicoComponent } from './prontuario-medico/prontuario-medico.component';
 import { ComponentTesteComponent } from './components/component-teste/component-teste.component';
 import { PerfilPacienteComponent } from './home-medico/perfil-paciente/perfil-paciente.component';
@@ -55,11 +54,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { GerenciarConsultasComponent } from './home-medico/gerenciar-consultas/gerenciar-consultas.component';
 import { ReceitaCadastradaComponent } from './home-medico/receita-cadastrada/receita-cadastrada.component';
 import { MedicamentosListaComponent } from './medicamentos-lista/medicamentos-lista.component';
-import { Medicacoes2Component } from './views/medicacoes2/medicacoes2.component';
-import { CuidadosComponent } from './views/medicacoes2/cuidados/cuidados.component';
-import { Cuidados1Component } from './views/medicacoes/cuidados1/cuidados1.component';
-import { Medicacoes3Component } from './views/medicacoes3/medicacoes3.component';
-import { Cuidados3Component } from './views/medicacoes3/cuidados3/cuidados3.component';
+import { EnviarReceitaComponent } from './home-medico/enviar-receita/enviar-receita.component';
+import { VerMedicacoesComponent } from './home-medico/ver-medicacoes/ver-medicacoes.component';
+import { ViewRemedioComponent } from './home-medico/ver-medicacoes/view-remedio/view-remedio.component';
+import { CadastrarInfoComponent } from './home-medico/perfil-paciente/cadastrar-info/cadastrar-info.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +70,6 @@ import { Cuidados3Component } from './views/medicacoes3/cuidados3/cuidados3.comp
     VerificaMedicoComponent,
     HomeMedicoComponent,
     HomePacienteComponent,
-    MedicacoesComponent,
     ViewPerfilmedicoComponent,
     ProntuarioMedicoComponent,
     ComponentTesteComponent,
@@ -80,11 +77,10 @@ import { Cuidados3Component } from './views/medicacoes3/cuidados3/cuidados3.comp
     GerenciarConsultasComponent,
     ReceitaCadastradaComponent,
     MedicamentosListaComponent,
-    Medicacoes2Component,
-    CuidadosComponent,
-    Cuidados1Component,
-    Medicacoes3Component,
-    Cuidados3Component
+    EnviarReceitaComponent,
+    VerMedicacoesComponent,
+    ViewRemedioComponent,
+    CadastrarInfoComponent
   ],
   imports: [
     BrowserModule,
