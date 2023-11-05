@@ -46,5 +46,9 @@ export class HomeComponent implements OnInit{
   redirectProntuario(){
    this.sharedService.redirectProntuario();
   }
+  redirectCadastroMedico(){
+    this.sharedService.redirectCadastroMedico()
+  }
+
 
 }

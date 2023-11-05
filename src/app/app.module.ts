@@ -58,6 +58,7 @@ import { EnviarReceitaComponent } from './home-medico/enviar-receita/enviar-rece
 import { VerMedicacoesComponent } from './home-medico/ver-medicacoes/ver-medicacoes.component';
 import { ViewRemedioComponent } from './home-medico/ver-medicacoes/view-remedio/view-remedio.component';
 import { CadastrarInfoComponent } from './home-medico/perfil-paciente/cadastrar-info/cadastrar-info.component';
+import { CadastromedicoComponent } from './views/cadastromedico/cadastromedico.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { CadastrarInfoComponent } from './home-medico/perfil-paciente/cadastrar-
     EnviarReceitaComponent,
     VerMedicacoesComponent,
     ViewRemedioComponent,
-    CadastrarInfoComponent
+    CadastrarInfoComponent,
+    CadastromedicoComponent
   ],
   imports: [
     BrowserModule,

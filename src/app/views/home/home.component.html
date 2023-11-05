@@ -16,7 +16,11 @@
       <button class="inf-depoimentos" (click)="mostrarInicio = false; mostrarBeneficios = false; mostrarDepoimentos = true;"><strong>Depoimentos</strong></button>
     </div>
     <div class="botoesEntrarCadastrar">
-      <button class="bCadastrar" (click)="redirectCadastro()">Cadastrar</button>
+      <button class="bCadastrar"  [matMenuTriggerFor]="menu">Cadastre-se</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="redirectCadastroMedico()">Médico</button>
+  <button mat-menu-item (click)="redirectCadastro()">Paciente</button>
+</mat-menu>
       <button class="bEntrar" (click)="mostrarDialog = true">Entrar</button>
     </div>
 

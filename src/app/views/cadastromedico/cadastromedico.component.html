@@ -1,7 +1,7 @@
 
 <body>
   <div class="login-container">
-    <h2>Cadastre-se como Paciente</h2>
+    <h2>Cadastre-se como médico</h2>
     <div class="informações">
       <form class="example-form">
         <mat-form-field class="example-full-width">
@@ -25,13 +25,11 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-
         <mat-form-field class="example-full-width">
-          <mat-label>Data de Nascimento - dd/mm/aaaa</mat-label>
-          <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-label for="especialidade">Sua especialidade:</mat-label>
+          <input matInput placeholder="Digite seu especialidade" id="especialidade" name="especialidade" [(ngModel)]="especialidade">
         </mat-form-field>
+
 
         <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>
@@ -55,4 +53,4 @@
       </div>
     </div>
   </div>
-</body>
+ </body>

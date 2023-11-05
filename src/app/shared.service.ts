@@ -41,6 +41,9 @@ export class SharedService {
   redirectCadastro(): void {
     this.router.navigate(['cadastro'], { relativeTo: this.route })
   }
+  redirectCadastroMedico(): void {
+    this.router.navigate(['cadastroMedico'], { relativeTo: this.route })
+  }
   redirectVerMedico() {
     this.router.navigate(['entrarComoMedico'], { relativeTo: this.route })
   }

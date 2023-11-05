@@ -112,7 +112,7 @@ body{
   justify-content: center;
   width: 400px;
   margin: 20px;
-  margin-top: 20px;
+  margin-top: 5px;
   overflow: hidden; /* Remova as barras de rolagem */
 }
 /* Estilo do título */
@@ -165,7 +165,14 @@ height: auto;
   margin: 0 auto; /* Centraliza horizontalmente */
 }
 
-
+h2{
+  border-radius: 5px;
+  background-color: #00005c;
+  width: 80%;
+  height: 5vh;
+  color: white;
+  text-align: center;
+}
 .bCancelar {
   background-color: #ec8787;
 }
@@ -195,12 +202,4 @@ height: auto;
 .checkbox-container {
   display: flex;
   align-items: center;
-}
-h2{
-  border-radius: 5px;
-  background-color: #00005c;
-  width: 80%;
-  height: 5vh;
-  color: white;
-  text-align: center;
 }

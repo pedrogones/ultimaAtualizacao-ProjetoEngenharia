@@ -18,11 +18,13 @@ import { EnviarReceitaComponent } from './home-medico/enviar-receita/enviar-rece
 import { VerMedicacoesComponent } from './home-medico/ver-medicacoes/ver-medicacoes.component';
 import { ViewRemedioComponent } from './home-medico/ver-medicacoes/view-remedio/view-remedio.component';
 import { CadastrarInfoComponent } from './home-medico/perfil-paciente/cadastrar-info/cadastrar-info.component';
+import { CadastromedicoComponent } from './views/cadastromedico/cadastromedico.component';
 
 
 const routes: Routes = [
   //declaração da rotas, na rota raiz a gente abre o LoginCompponent
   {path: '', component: HomeComponent},
+  {path: 'cadastroMedico', component: CadastromedicoComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cadastro', component: CadastroComponent},
   {path: 'paciente', component: PacientesComponent},
@@ -32,7 +34,7 @@ const routes: Routes = [
   {path: 'homePaciente/perfilMedico', component: ViewPerfilmedicoComponent},
   //{path: 'homeMedico/prontuario', component: ProntuarioMedicoComponent}, esse é o errado
   {path: 'homeMedico/perfilMeuPaciente', component: PerfilPacienteComponent},
-  
+
   {path: 'homeMedico/perfilMeuPaciente/mudarInformacoes', component: CadastrarInfoComponent},
   {path: 'homeMedico/listaDePacientes', component: ListaDePacientesComponent},
   {path: 'homeMedico/gerenciarConsultas', component: GerenciarConsultasComponent},
