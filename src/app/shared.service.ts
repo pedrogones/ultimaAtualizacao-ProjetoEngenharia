@@ -59,6 +59,9 @@ export class SharedService {
   redirectMeuPaciente(paciente: any) {
     this.router.navigate(['homeMedico/perfilMeuPaciente'], { relativeTo: this.route })
   }
+  redirectCadInfoPaciente(paciente: any){
+    this.router.navigate(['homeMedico/perfilMeuPaciente/mudarInformacoes'], {relativeTo: this.route})
+  }
 
   redirectCadReceita(){
     this.router.navigate(['homeMedico/cadReceita'], {relativeTo: this.route})
@@ -104,6 +107,13 @@ export class SharedService {
     });
 
   }
-
-
+  redirectEnviarReceita(){
+    this.router.navigate(['homeMedico/enviarReceita'], {relativeTo: this.route})
+  }
+  redirectVerMedicacoes(){
+    this.router.navigate(['homeMedico/verMedicacoes'], {relativeTo: this.route})
+  }
+  redirectRemedioSelected(medicamento: any){
+    this.router.navigate(['homeMedico/verMedicacoes/:id'], {relativeTo: this.route})
+  }
 }
