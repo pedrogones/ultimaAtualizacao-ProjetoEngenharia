@@ -11,6 +11,9 @@ body{
   flex-direction: row;
   background-color: rgba(128, 128, 128, 0.24);
 }
+.labels{
+  width: 90%;
+}
 
 section{
   width: 50%;
@@ -102,6 +105,19 @@ section{
   cursor: pointer;
   transition: 0.3s;
  }
+ button{
+  color: white;
+  border: 1px solid #00005c;
+  border-radius: 10px;
+  font-weight: 500;
+  width: 100px;
+  background-color: #4E4EC2;
+  cursor: pointer;
+  transition: 0.3s;
+ }
+ button:hover{
+  background-color: #4e4ec26c;
+ }  
 
  .sEsquerda button:hover{
   background-color: #4e4ec26c;

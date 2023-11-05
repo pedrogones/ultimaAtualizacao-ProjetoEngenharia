@@ -6,8 +6,8 @@
       <label for="nome" class="nome"><strong>{{nomeMedico}} </strong></label>
     </div>
     <div class="botoes">
-      <button class="butonStyle" id="bReceita" (click)="mostrarInputPdf=true">Enviar Receita</button>
-      <button class="butonStyle" id="bProntuario" (click)="redirectMedicacoes()">Ver Medicações</button>
+      <button class="butonStyle" id="bReceita" (click)="redirectEnviarReceita()">Enviar Receita</button>
+      <button class="butonStyle" id="bProntuario" (click)="redirectVerMedicacoes()">Ver Medicações</button>
       <button class="butonStyle" id="bConsulta" (click)="mostrarCardGerenciarConsultas = true">Ver Consultas</button>
       <div class="botoesEntrarCadastrar">
         <button class="butonStyle" mat-button [matMenuTriggerFor]="menu" id="bSeusPacientes"
@@ -49,37 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="card modal" *ngIf="mostrarInputPdf">
-      <div class="tools modal-content">
-        <div style="align-content: center;">
-          <button class="butonStyle" (click)="mostrarInputPdf=false"
-            style="background-color: crimson; color:black;">
 
-            <i class="fas fa-times"></i> <!-- Ícone de fechar -->
-          </button>
-
-        </div>
-        <div class="card__content" style="justify-content: center;">
-          <div class="div-gerenciaA textFormat">
-            <p style="margin-left: 32%;">Faça o upload da receita preescrita<br></p>
-            <p style="margin-left: 25%;">(O documento deve estar assinado pelo responsável)</p>
-            <div class="botoes">
-              <!-- Outros botões existentes -->
-              <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;">
-              <!-- Input de arquivo PDF oculto -->
-            </div>
-            <br>
-            <mat-form-field style="width: 52%;">
-              <mat-label>Envie alguma observação(opcional):</mat-label>
-              <textarea matInput [(ngModel)]="observacoes"></textarea>
-            </mat-form-field>
-            <button class="butonStyle" style="margin-left: 30%; margin-top: 90px" id="enviarButton" (click)="enviarPdf()">Enviar</button>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
   </section>
   <section class="parte-de-baixo">
     <div>

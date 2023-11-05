@@ -1,0 +1,33 @@
+<div class="card modal">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <div class="tools modal-content">
+    <div style="align-content: center;">
+      <button class="butonStyle" (click)="back()"
+        style="background-color: crimson; color:black;">
+
+        <i class="fas fa-times"></i> <!-- Ícone de fechar -->
+      </button>
+
+    </div>
+    <div class="card__content" style="justify-content: center;">
+      <div class="div-gerenciaA textFormat">
+        <p style="margin-left: 32%;">Faça o upload da receita preescrita<br></p>
+        <p style="margin-left: 25%;">(O documento deve estar assinado pelo responsável)</p>
+        <div class="botoes">
+          <!-- Outros botões existentes -->
+          <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;">
+          <!-- Input de arquivo PDF oculto -->
+        </div>
+        <br>
+        <mat-form-field style="width: 52%;">
+          <mat-label>Envie alguma observação(opcional):</mat-label>
+          <textarea matInput [(ngModel)]="observacoes"></textarea>
+        </mat-form-field>
+        <button class="butonStyle" style="margin-left: 30%; margin-top: 90px" id="enviarButton" (click)="enviarPdf()">Enviar</button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

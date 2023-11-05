@@ -53,7 +53,6 @@ export class HomeMedicoComponent implements OnInit {
   selectedHours: string[] = [];
   //logica para pegar o dia e hora que o médico estará disponível
   selectDate!: string | null; // Defina selectDate como um objeto Date ou nulo (null)
-
   onDateSelected(event: MatDatepickerInputEvent<Date>) {
     const dataSelecionada = event.value;
     if (dataSelecionada) {
@@ -62,9 +61,6 @@ export class HomeMedicoComponent implements OnInit {
       this.selectDate = dataSelecionada.getDate() + '/' + month + '/' + dataSelecionada.getFullYear();
     }
   }
-
-
-
   onCheckboxChange(hour: string) {
     if (this.selectedHours.includes(hour)) {
       // Se a hora já estiver na lista, remova-a
@@ -73,40 +69,6 @@ export class HomeMedicoComponent implements OnInit {
       // Se a hora não estiver na lista, adicione-a
       this.selectedHours.push(hour);
     }
-  }
-  mostrarInputPdf=false;
-  observacoes='';
-
-
-
-
-  async handlePdfUpload() {
-    const fileInput = document.getElementById("pdfInput") as HTMLInputElement;
-    const file = fileInput.files; // Pega o primeiro arquivo selecionado (neste caso, um arquivo PDF)
-    if(file?.length==0){
-      this.sharedService.dialogConfirm("Selecione um arquivo", false)
-    } else if (file && this.observacoes == '') {
-      this.sharedService.dialogConfirm("Preescrição enviada com sucesso", true)
-      console.log('sem observacoes');
-      console.log(file);
-      this.sharedService.callDelay(2000)
-    } else if (file && this.observacoes != '') {
-      this.sharedService.dialogConfirm("Preescrição enviada com sucesso", true)
-      console.log(file)
-      console.log('com observacoes');
-      this.sharedService.callDelay(2000)
-      // Aqui você pode adicionar a lógica para fazer o upload do PDF e processar as observações.
-      // Por exemplo, você pode chamar uma função de serviço para enviar os dados para o servidor.
-      // Ou qualquer outra ação que desejar realizar.
-    }
-    this.mostrarInputPdf=false
-  }
-
-  enviarPdf(){
-    this.handlePdfUpload()
-  }
-  exitIpnut(){
-    this.mostrarInputPdf=false
   }
   enviar() {
     if (this.selectDate&&this.selectedHours) {
@@ -237,10 +199,9 @@ pacientes: Paciente[] = [
     this.sharedService.redirectGerenciarConsultas(); // Redireciona para a página de gerenciamento de consultas
   }
 
-  redirectMedicacoes(){
-    this.sharedService.redirectMedicacoes()
+  redirectVerMedicacoes(){
+    this.sharedService.redirectVerMedicacoes()
   }
-
   // Função para definir o paciente selecionado e redirecionar para a tela do paciente
   redirectPerfilMeuPaciente(paciente: Paciente) {
     this.pacienteService.setPacienteSelecionado(paciente);
@@ -253,4 +214,7 @@ pacientes: Paciente[] = [
     this.sharedService.redirectHome()
   }
 
+  redirectEnviarReceita(){
+    this.sharedService.redirectEnviarReceita();
+  }
 }

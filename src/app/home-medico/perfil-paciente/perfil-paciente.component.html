@@ -14,15 +14,46 @@
 
   <section class="sDireita">
       <h2>Informações pessoais</h2>
-
-      <label for="nome" class="nome"><strong>Nome do Paciente: {{nomePaciente}}</strong></label>
-      <label for="idade" class="idade"><strong>Idade: {{idadePaciente}} anos</strong></label>
-      <label for="sexo" class="sexo"><strong>Sexo: {{sexoPaciente}} </strong></label>
-      <label for="rg" class="rg"><strong>Rg: {{rgPaciente}} </strong></label>
+      <label for="nome" class="labels nome"><strong>Nome do Paciente: {{nomePaciente}}</strong></label>
+      <label for="idade" class="labels idade"><strong>Idade: {{idadePaciente}} anos</strong></label>
+      <label for="sexo" class="labels sexo"><strong>Sexo: {{sexoPaciente}} </strong></label>
+      <label for="rg" class="labels rg"><strong>Rg: {{rgPaciente}} </strong></label>
       <h2>informações médicas</h2>
-      <label for="doenca"><strong>Doença: {{doencaPaciente}} </strong></label>
-      <label for="alergia"><strong>Alergias: {{alergiasPaciente}} </strong></label>
-      <label for="historico-familiar"><strong>Histórico familiar: {{historicoPaciente}} </strong></label>
+      <label class="labels" for="doenca"><strong>Doença: {{doencaPaciente}} </strong></label>
+      <label class="labels" for="alergia"><strong>Alergias: {{alergiasPaciente}} </strong></label>
+      <label class="labels" for="historico-familiar"><strong>Histórico familiar: {{historicoPaciente}} </strong></label>
+      <button (click)="cadstrarInformacoes()">Alterar Informações</button>
+
+  </section>
+  <section class="sDireita">
+    <h2>Histórico médico</h2>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="tipoExame">
+        <th mat-header-cell *matHeaderCellDef> Exame </th>
+        <td mat-cell *matCellDef="let element"> {{element.tipoExame}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="medico">
+        <th mat-header-cell *matHeaderCellDef> Médico </th>
+        <td mat-cell *matCellDef="let element"> {{element.medico}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
   </section>
 
 </body>

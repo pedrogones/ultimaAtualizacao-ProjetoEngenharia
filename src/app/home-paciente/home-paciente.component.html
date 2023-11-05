@@ -7,15 +7,10 @@
             (change)="onRadioChange('inicio')">
           <span>Início</span>
         </label>
-        <label for="radioReceita">
-          <input type="radio" name="radio" id="radioReceita" [(ngModel)]="receita" [value]="'receita'"
-            (change)="onRadioChange('receita')">
-          <span>Receitas</span>
-        </label>
         <label for="radioProntuario">
           <input type="radio" name="radio" id="radioProntuario" [(ngModel)]="prontuario" [value]="'prontuario'"
             (change)="onRadioChange('prontuario')">
-          <span>Prontuário</span>
+          <span>Histórico médico</span>
         </label>
         <label for="radioMostrarMedicamentos">
           <input type="radio" name="radio" id="radioMostrarMedicamentos" [(ngModel)]="mostrarMedicamentos" [value]="'mostrarMedicamentos'"
@@ -122,14 +117,6 @@
           </span>
           <p class="description">
           {{medicamentosAtuais}} </p>
-        </form>
-      </div>
-      <div class="quadrado">
-        <form class="form">
-          <span class="title">Histórico de Consultas Médicas:</span>
-          <p class="description">
-          {{historicoMedico}}
-          </p>
         </form>
       </div>
       <div class="quadrado">
