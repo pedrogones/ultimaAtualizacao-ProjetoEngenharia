@@ -5,6 +5,7 @@ export interface Paciente{
   idade: string;
   alergico: string;
   doencas: string;
+  dataNascimento: string;
   historicoFamiliar: string;
   email: string;
   rg: string;

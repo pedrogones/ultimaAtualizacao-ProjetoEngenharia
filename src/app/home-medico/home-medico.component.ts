@@ -113,6 +113,7 @@ pacientes: Paciente[] = [
     _id: 'id-1',
     name: "Pedro Targino Gomes",
     usuario: 'usuario-1',
+    dataNascimento:'00000000',
     idade: '30',
     alergico: 'Alérgico a dipirona monohidratada',
     doencas:'não há',
@@ -124,6 +125,7 @@ pacientes: Paciente[] = [
   },
   {
     _id: 'id-1',
+    dataNascimento:'00000000',
     name: "Arthur Vieira",
     usuario: 'usuario-2',
     idade: '38',
@@ -138,6 +140,7 @@ pacientes: Paciente[] = [
   {
     _id: 'id-2',
     name: "João Victor",
+    dataNascimento:'00000000',
     usuario: 'usuario-3',
     idade: '28',
     alergico: 'Não',
@@ -153,6 +156,7 @@ pacientes: Paciente[] = [
     name: "Cássio Vittori",
     usuario: 'usuario-4',
     idade: '35',
+    dataNascimento:'00000000',
     alergico: 'Alérgico a penicilina',
     doencas: 'Diabetes Tipo 2',
     historicoFamiliar: 'Diabetes Tipo 1 e Hipertensão',
@@ -166,6 +170,7 @@ pacientes: Paciente[] = [
     name: "Geraldo Ferreira",
     usuario: 'usuario-5',
     idade: '45',
+    dataNascimento:'00000000',
     alergico: 'Não',
     doencas: 'Hipertensão e Colesterol Alto',
     historicoFamiliar: 'Nenhum histórico de doenças familiares',
@@ -185,6 +190,7 @@ pacientes: Paciente[] = [
     email: 'email-6',
     rg: '12398-76',
     sexo: "Masculino",
+    dataNascimento:'00000000',
     url_img: "icaroPaciente.png"
   }
 
