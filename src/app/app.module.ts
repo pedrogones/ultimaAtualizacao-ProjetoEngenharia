@@ -82,7 +82,7 @@ import { CadastromedicoComponent } from './views/cadastromedico/cadastromedico.c
     VerMedicacoesComponent,
     ViewRemedioComponent,
     CadastrarInfoComponent,
-    CadastromedicoComponent
+    CadastromedicoComponent,
   ],
   imports: [
     BrowserModule,

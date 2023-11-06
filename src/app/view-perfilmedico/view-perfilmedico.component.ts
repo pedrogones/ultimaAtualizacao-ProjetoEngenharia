@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { Data } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { Medico } from '../medico/medico';
+import { MedicoService } from '../services/medico.service';
 
 
 interface ExameType {
@@ -21,10 +23,12 @@ interface DiaDisponibilidade {
   styleUrls: ['./view-perfilmedico.component.scss']
 })
 export class ViewPerfilmedicoComponent implements OnInit {
+  public medicoService!: MedicoService;
   constructor(private sharedService: SharedService) {
 
   }
   ngOnInit(): void {
+//    this.listarMedicos();
     this.strDataHoje = this.dataHoje.getFullYear() + '-' + (this.dataHoje.getMonth() + 1) + '-' + this.dataHoje.getDate()
   }
 
@@ -54,15 +58,30 @@ horario: string | null = null;
   ];
   motivoExame = this.exameTypes[2].value;
 
-  medicoTypes: string[] = [
+ listarMedicos(){
+    this.medicoService.listarMedicos().subscribe(
+      (medicos: Medico[]) => {
+        // Extraia os nomes dos médicos e armazene-os no medicosArray
+        this.medicosArray = medicos.map(medico => medico.nome);
+        console.log(this.medicosArray.map.name)
+      },
+      (error: any) => {
+        console.error('Erro ao listar médicos:', error);
+      }
+    );
+  }
+
+
+  medicosArray: string[] = []
+  arrayMedicos: string[] = [
     'Dr. João Silva',
     'Dra. Maria Oliveira',
     'Dr. Carlos Santos',
     // esse array será o que vai ser puxado do banco de dados
-
   ];
 
-  selectedMedico: string = this.medicoTypes[0]; // Seleciona o primeiro médico por padrão
+
+  selectedMedico: string = this.arrayMedicos[0]; // Seleciona o primeiro médico por padrão
   agendarConsultaClick() {
     this.agendarConsulta = true;
     this.verReserva = false;

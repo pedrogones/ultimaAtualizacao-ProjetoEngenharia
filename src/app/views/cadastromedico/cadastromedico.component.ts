@@ -5,7 +5,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth-service.service';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
+import { MedicoService } from 'src/app/services/medico.service';
 import { SharedService } from 'src/app/shared.service';
+import { Medico } from 'src/app/medico/medico';
 
 @Component({
   selector: 'app-cadastromedico',
@@ -15,10 +17,11 @@ import { SharedService } from 'src/app/shared.service';
 export class CadastromedicoComponent {
 
   nome!: string;
-  idade!: number;
+  usuario!: string;
   email!: string;
-  especialidade!:string
   sexo!:string;
+  especialidade!:string;
+  contato!:string;
   senha!: string;
   meuFormulario: any;
   formBuilder: any;
@@ -27,7 +30,7 @@ export class CadastromedicoComponent {
   //selecionar o inoput do sexo:
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   myControl = new FormControl('');
-  options: string[] = ['Feminino', 'Masculino',  'Não Informar'];
+  options: string[] = ['F', 'M'];
   filteredOptions: string[];
 
 
@@ -42,11 +45,13 @@ export class CadastromedicoComponent {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private medicoService: MedicoService // Injete o MedicoService no construtor
   ) {
     this.filteredOptions = this.options.slice();
   }
@@ -67,15 +72,14 @@ export class CadastromedicoComponent {
   // Função para validar se o formulário está completo
   isValidForm(): boolean {
     // Verifique se todos os campos obrigatórios estão preenchidos
-    console.log(this.senha, this.nome,
-      this.idade,
-      this.email, this.sexo)
+    console.log(this.nome, this.sexo,
+      this.email, this.especialidade, this.senha)
     return (
       !!this.nome &&
-      !!this.idade &&
       !!this.email &&
       !!this.sexo &&
-      !!this.senha
+      !!this.senha&&
+      !!this.especialidade
     );
   }
 
@@ -83,20 +87,29 @@ export class CadastromedicoComponent {
   //Função para lidar com o clique no botão de cadastro
   //usada somente para fins de teste do front, nao usar no back
   fazerCadastro(): void {
+    const medicoData:Medico={
+      nome: this.nome,
+      usuario: '',
+      email: this.email,
+      sexo: this.sexo,
+      especialidade: this.especialidade,
+      contato: this.contato,
+      senha: this.senha
+    }
     if (this.isValidForm()) {
-      this.authService.addUser( this.senha, this.nome,
-        this.idade, this.email).subscribe(
+      this.medicoService.cadastrarMedico(medicoData)
+      .subscribe(
           (response) => {
-            console.log('Cadastro do paciente realizado com sucesso:', response);
-            this.sharedService.dialogConfirm("Cadastro do paciente realizado com sucesso: " + response, true)
+            console.log('Cadastro Médico realizado com sucesso:', response);
+            this.sharedService.dialogConfirm("Cadastro Médico realizado com sucesso:" + response, true)
             // Você pode redirecionar o usuário para outra página aqui, se necessário
           },
           (error) => {
-            this.sharedService.dialogConfirm('Erro ao cadastrar o paciente:' + error, false)
-            console.error('Erro ao cadastrar o paciente:', error);
+            this.sharedService.dialogConfirm('Erro ao cadastrar o Medico:' + error, false)
+            console.error('Erro ao cadastrar o Medico:', error);
           }
         );
-      this.redirectLogin();
+        this.sharedService.redirectVerMedico()
     } else {
       this.sharedService.dialogConfirm("Preencha todos os campos", true);
     }

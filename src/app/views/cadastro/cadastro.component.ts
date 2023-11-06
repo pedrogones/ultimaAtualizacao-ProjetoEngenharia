@@ -1,42 +1,63 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
-import { SharedService } from 'src/app/shared.service';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth-service.service';
-import { PacienteService } from 'src/app/pacienteService';
+import { PacienteServicesService } from 'src/app/services/paciente-services.service';
 import { ConfirmationDialogComponent } from 'src/app/sharedDialog/confirmation-dialog/confirmation-dialog.component';
-//import { MeuDialogComponent } from '../meu-dialog/meu-dialog.component'; // Certifique-se de usar o caminho correto
+import { SharedService } from 'src/app/shared.service';
+import { Paciente } from 'src/app/pacientes/paciente';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.scss'],
-
 })
-export class CadastroComponent implements OnInit {
+export class CadastroComponent {
+  nome: string = '';
+  id: number = 0;
+  dataNascimento: string = '';
+  email: string = '';
+  sexo: string = '';
+  usuario: string = '';
+  senha: string = '';
+  cpf: string = '';
 
-  nome!: string;
-  idade!: number;
-  email!: string;
-  sexo!:string;
-  usuario!: string;
-  senha!: string;
-  meuFormulario: any;
-  formBuilder: any;
-  dataNascimento!: Date;
+  paciente: Paciente[] = [];
 
-  onDateChange(event: any) {
-    this.dataNascimento = event.value;
-  }
-  //selecionar o inoput do sexo:
-  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   myControl = new FormControl('');
-  options: string[] = ['Feminino', 'Masculino',  'Não Informar'];
+  options: string[] = ['F', 'M'];
   filteredOptions: string[];
 
+  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
+  @ViewChild('menuButton') menuButton!: MatMenuTrigger;
+
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private sharedService: SharedService,
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private pacienteService: PacienteServicesService
+  ) {
+    this.filteredOptions = this.options.slice();
+  }
+
+  onDateChange(event: any) {
+    const dataSelecionada: Date = event.value;
+    if (dataSelecionada) {
+      const dia = ('0' + dataSelecionada.getDate()).slice(-2);
+      const mes = ('0' + (dataSelecionada.getMonth() + 1)).slice(-2);
+      const ano = dataSelecionada.getFullYear();
+      this.dataNascimento = `${ano}-${mes}-${dia}`;
+      console.log("Data formatada: " + this.dataNascimento);
+    } else {
+      this.dataNascimento = '';
+    }
+  }
 
   filter(inputElement: HTMLInputElement): void {
     const filterValue = inputElement.value.toLowerCase();
@@ -44,66 +65,39 @@ export class CadastroComponent implements OnInit {
     this.filteredOptions = this.options.filter(o => o.toLowerCase().includes(filterValue));
   }
 
-  //verifica se email ta no formato correto
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
-  constructor(private router: Router,
-    private route: ActivatedRoute,
-    private sharedService: SharedService,
-    private dialog: MatDialog,
-    private authService: AuthService
-  ) {
-    this.filteredOptions = this.options.slice();
-  }
-  @ViewChild('menuButton')
-  menuButton!: MatMenuTrigger;
-  ngOnInit(): void { }
+
   openDialog(message: string) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: message,
     });
+  }
 
-  }
-  //valida formato do email
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  redirectProntuario() {
-    this.sharedService.redirectProntuario();
-  }
-  // Função para validar se o formulário está completo
   isValidForm(): boolean {
-    // Verifique se todos os campos obrigatórios estão preenchidos
-    console.log(this.senha, this.nome,
-      this.idade,
-      this.email, this.dataNascimento, this.sexo)
-    return (
-      !!this.nome &&
-      !!this.idade &&
-      !!this.email &&
-      !!this.dataNascimento &&
-      !!this.sexo &&
-      !!this.senha
-    );
+    return !!this.nome && !!this.email && !!this.dataNascimento && !!this.sexo && !!this.senha;
   }
 
-
-  //Função para lidar com o clique no botão de cadastro
-  //usada somente para fins de teste do front, nao usar no back
-  fazerCadastro(): void {
+  async fazerCadastro(): Promise<void> {
+    const pacienteData: Paciente = {
+      _id: this.id,
+      name: this.nome,
+      dataNascimento: this.dataNascimento,
+      usuario: this.usuario,
+      idade: '',
+      alergico: '',
+      doencas: '',
+      historicoFamiliar: '',
+      email: this.email,
+      rg: this.cpf,
+      sexo: this.sexo,
+      url_img: '',
+    };
     if (this.isValidForm()) {
-      this.authService.addUser( this.senha, this.nome,
-        this.idade, this.email).subscribe(
-          (response) => {
-            console.log('Cadastro do paciente realizado com sucesso:', response);
-            this.sharedService.dialogConfirm("Cadastro do paciente realizado com sucesso: " + response, true)
-            // Você pode redirecionar o usuário para outra página aqui, se necessário
-          },
-          (error) => {
-            this.sharedService.dialogConfirm('Erro ao cadastrar o paciente:' + error, false)
-            console.error('Erro ao cadastrar o paciente:', error);
-          }
-        );
+      this.pacienteService.cadastrarPaciente(pacienteData);
+      await this.sharedService.callDelay(2000);
       this.redirectLogin();
     } else {
       this.openDialog("Preencha todos os campos e selecione a opção 'Paciente' ou 'Médico'");
@@ -113,17 +107,16 @@ export class CadastroComponent implements OnInit {
   redirectHome(): void {
     this.sharedService.redirectHome();
   }
+
   redirectLogin(): void {
     this.sharedService.redirectLogin();
   }
+
   toggleMenu(): void {
-    this.menuButton.openMenu(); // Abre o menu ao clicar no ícone do menu
+    this.menuButton.openMenu();
   }
+
   redirect(): void {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
-
-
-
-
 }
