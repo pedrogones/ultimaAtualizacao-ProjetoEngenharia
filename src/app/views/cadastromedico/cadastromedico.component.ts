@@ -88,13 +88,9 @@ export class CadastromedicoComponent {
   //usada somente para fins de teste do front, nao usar no back
   fazerCadastro(): void {
     const medicoData:Medico={
-      nome: this.nome,
-      usuario: '',
-      email: this.email,
-      sexo: this.sexo,
-      especialidade: this.especialidade,
-      contato: this.contato,
-      senha: this.senha
+      nomeMedico: this.nome,
+      especialidadeMedico: this.especialidade,
+      contatoMedico: this.email
     }
     if (this.isValidForm()) {
       this.medicoService.cadastrarMedico(medicoData)

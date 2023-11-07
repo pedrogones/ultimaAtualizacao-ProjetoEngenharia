@@ -2,12 +2,11 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from 'src/app/auth-service.service';
-import { PacienteServicesService } from 'src/app/services/paciente-services.service';
 import { ConfirmationDialogComponent } from 'src/app/sharedDialog/confirmation-dialog/confirmation-dialog.component';
 import { SharedService } from 'src/app/shared.service';
 import { Paciente } from 'src/app/pacientes/paciente';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { PacienteService } from 'src/app/services/paciente.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -15,14 +14,18 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./cadastro.component.scss'],
 })
 export class CadastroComponent {
-  nome: string = '';
-  id: number = 0;
-  dataNascimento: string = '';
-  email: string = '';
-  sexo: string = '';
-  usuario: string = '';
-  senha: string = '';
-  cpf: string = '';
+  nome!: string;
+  id!: number;
+  dataNascimento!: string;
+  email!: string;
+  sexo!: string;
+  usuario!: string;
+  senha!: string;
+  cpf!: string;
+  enreco!: string;
+  _idFixo1: number = 3;
+  telCttEmergencia!: string;
+  nomeCttEmergencia!: string;
 
   paciente: Paciente[] = [];
 
@@ -40,8 +43,7 @@ export class CadastroComponent {
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private dialog: MatDialog,
-    private authService: AuthService,
-    private pacienteService: PacienteServicesService
+    private pacienteService: PacienteService
   ) {
     this.filteredOptions = this.options.slice();
   }
@@ -53,7 +55,7 @@ export class CadastroComponent {
       const mes = ('0' + (dataSelecionada.getMonth() + 1)).slice(-2);
       const ano = dataSelecionada.getFullYear();
       this.dataNascimento = `${ano}-${mes}-${dia}`;
-      console.log("Data formatada: " + this.dataNascimento);
+      console.log('Data formatada: ' + this.dataNascimento);
     } else {
       this.dataNascimento = '';
     }
@@ -77,30 +79,37 @@ export class CadastroComponent {
   }
 
   isValidForm(): boolean {
-    return !!this.nome && !!this.email && !!this.dataNascimento && !!this.sexo && !!this.senha;
+    return !!this.nome && !!this.email && !!this.dataNascimento && !!this.sexo;
   }
 
   async fazerCadastro(): Promise<void> {
     const pacienteData: Paciente = {
       _id: this.id,
-      name: this.nome,
-      dataNascimento: this.dataNascimento,
-      usuario: this.usuario,
-      idade: '',
-      alergico: '',
-      doencas: '',
-      historicoFamiliar: '',
-      email: this.email,
-      rg: this.cpf,
+      nomePaciente: this.nome,
+      endereco: this.enreco,  // Corrigido para "enreco"
+      contatoPaciente: this.email,
+      dataNascPaciente: this.dataNascimento,
+      cpf: this.cpf,
       sexo: this.sexo,
-      url_img: '',
+      telCttEmergencia: this.telCttEmergencia,
+      nomeCttEmergencia: this.nomeCttEmergencia
     };
+
     if (this.isValidForm()) {
-      this.pacienteService.cadastrarPaciente(pacienteData);
-      await this.sharedService.callDelay(2000);
-      this.redirectLogin();
+      this.pacienteService.cadastrarPaciente(pacienteData).subscribe(
+        (response) => {
+          console.log('Cadastro do Paciente realizado com sucesso:', response);
+          this.sharedService.dialogConfirm('Cadastro do Paciente realizado com sucesso:' + response, true);
+          // Você pode redirecionar o usuário para outra página aqui, se necessário
+        },
+        (error) => {
+          this.sharedService.dialogConfirm('Erro ao cadastrar o Paciente:' + error, false);
+          console.error('Erro ao cadastrar o Paciente:', error);
+        }
+      );
+      //  this.redirectLogin();
     } else {
-      this.openDialog("Preencha todos os campos e selecione a opção 'Paciente' ou 'Médico'");
+      this.openDialog('Preencha todos os campos');
     }
   }
 

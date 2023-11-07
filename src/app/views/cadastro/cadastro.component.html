@@ -1,14 +1,22 @@
 
 <body>
+  <h2>Cadastre-se como Paciente</h2>
   <div class="login-container">
-    <h2>Cadastre-se como Paciente</h2>
+
     <div class="informações">
       <form class="example-form">
         <mat-form-field class="example-full-width">
           <mat-label for="nome">Nome:</mat-label>
           <input matInput placeholder="Digite seu nome" id="nome" name="nome" [(ngModel)]="nome">
         </mat-form-field>
-
+        <mat-form-field class="example-full-width">
+          <mat-label for="enreco">Endereco:</mat-label>
+          <input matInput placeholder="Digite seu enreco" id="enreco" name="enreco" [(ngModel)]="enreco">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="cpf">cpf:</mat-label>
+          <input matInput placeholder="Digite seu cpf" id="cpf" name="cpf" [(ngModel)]="cpf">
+        </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Sexo:</mat-label>
           <input matInput #inputElement placeholder="Selecione seu sexo:" id="sexo" name="sexo"
@@ -22,14 +30,6 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Data de Nascimento - dd/mm/aaaa</mat-label>
-          <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
         <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>
           <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" id="email"
@@ -41,14 +41,39 @@
             O email é <strong>obrigatório</strong>
           </mat-error>
         </mat-form-field>
+      </form>
+      <div class="button-container">
+        <button class="bCancelar" (click)="redirectHome()">Cancelar</button>
+      </div>
+
+    </div>
+    <div class="informações">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Data de Nascimento - dd/mm/aaaa</mat-label>
+          <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="nomeCttEmergencia">Nome contato de Emergencia:</mat-label>
+          <input matInput placeholder="Digite seu nomeCttEmergencia" id="nomeCttEmergencia" name="nomeCttEmergencia">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="telCttEmergencia">Tel. contato de Emergencia:</mat-label>
+          <input matInput placeholder="Digite seu telCttEmergencia" id="telCttEmergencia" name="telCttEmergencia">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label for="usuario">Usuario:</mat-label>
+          <input matInput placeholder="Digite seu usuario" id="usuario" name="usuario">
+        </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label for="senha">Senha:</mat-label>
-          <input matInput placeholder="Digite sua senha" type="password" id="senha" name="senha" [(ngModel)]="senha">
+          <input matInput placeholder="Digite sua senha" type="password" id="senha" name="senha">
         </mat-form-field>
       </form>
       <div class="button-container">
         <button class="bSalvar" (click)="fazerCadastro()">Salvar</button>
-        <button class="bCancelar" (click)="redirectHome()">Cancelar</button>
       </div>
     </div>
   </div>
