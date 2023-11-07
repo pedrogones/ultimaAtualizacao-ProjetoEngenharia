@@ -53,12 +53,12 @@
     <div *ngIf="inicio" class="borda-de-baixo">
       <div class="quadrado">
         <form class="form">
-          <span class="title">{{nome +' '+sobrenome}}</span>
-          <p class="description">Data de nascimento: {{nascimento}}
+          <span class="title">{{paciente.nomePaciente}}</span>
+          <p class="description">Data de nascimento: {{paciente.dataNascPaciente}}
             <br>
-            Sexo: {{sexo}}
+            Sexo: {{paciente.sexo}}
             <br>
-            Endereço residencial: {{endereco}}
+            Endereço residencial: {{paciente.endereco}}
           </p>
         </form>
 
@@ -66,48 +66,28 @@
       <div class="quadrado">
         <form class="form">
           <span class="title">Informações de Contato e emergência</span>
-          <p class="description">Número de telefone de contato: {{telefone}} <br>
-            Número de identificação (RG): {{rg}} <br>
-            Nome e informações de contato de um contato de emergência: {{nomeContatoEmergencia}} -
-            {{numeroParaEmergencia}}</p>
-        </form>
-      </div>
-      <div class="quadrado">
-        <form class="form">
-          <span class="title">Histórico Medico pessoal</span>
-          <p class="description">
-            Condições médicas pré-existentes: {{conMedica}}<br>
-            Alergias a medicamentos ou alimentos: {{alergias}} <br>
-            Medicamentos em uso regular: {{medUsoRegular}}
-          </p>
+          <p class="description">contato eletrônico: {{paciente.contatoPaciente}} <br>
+            Cpf: {{paciente.cpf}} <br>
+            Contato de emergência:<br>
+            Nome: {{paciente.nomeCttEmergencia}} <br>
+            Numero: {{paciente.telCttEmergencia}}</p>
         </form>
       </div>
 
     </div>
-    <div *ngIf="receita" class="borda-de-baixo">
-      <!--Cria um novo "Quadrado para cada medicamento"-->
-        <div class="medicamento" *ngFor="let medicamento of medicamentos">
-          <div class="quadrado">
-          <form class="form">
-            <span class="title">
-              {{ medicamento.nomeMedicamento }}
-            </span>
-            <p class="description">
-              Data da Prescrição: {{ medicamento.dataPrescricao }} <br>
-              Dosagem: {{ medicamento.dosagem }} <br>
-              Posologia: {{ medicamento.posologia }} <br>
-              Indicações: {{ medicamento.indicacoes }}
-            </p>
-          </form>
-          </div>
-        </div>
-    </div>
+
     <div *ngIf="prontuario" class="borda-de-baixo">
       <div class="quadrado">
         <form class="form">
           <span class="title"> Antecedentes Médicos:</span>
           <p class="description">
-            {{antecedente}}
+           Doenças anteriores: {{historico.doencasAnteriores}}
+            <br>
+            Doenças Crônicas:{{historico.doencasCronicas}}
+             <br>
+           Alergias: {{historico.alergias}}
+            <br>
+            Cirurgias recentes:  {{historico.cirurgiasAnteriores}}
           </p>
         </form>
       </div>
@@ -116,17 +96,12 @@
           <span class="title">Medicamentos em Uso Atual:
           </span>
           <p class="description">
-          {{medicamentosAtuais}} </p>
+          Medicamento: {{historico.medicacoesAtuais}}
+        <br>
+       Anteriormente usava: {{historico.medicacoesAnteriores}} </p>
         </form>
       </div>
-      <div class="quadrado">
-        <form class="form">
-          <span class="title">Observações:</span>
-          <p class="description">
-          {{observacoes}}
-          </p>
-        </form>
-      </div>
+
    </div>
    <div *ngIf="mostrarMedicamentos" class="borda-de-baixo">
     <!--Cria um novo "Quadrado para cada medicamento"-->
@@ -175,7 +150,7 @@
         <p style="margin-left: 40%; color: #151516;">(Só pode enviar um por vez)</p>
         <div class="botoes">
           <!-- Outros botões existentes -->
-          <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;">
+          <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;" (change)="selecionarArquivo($event)" >
           <!-- Input de arquivo PDF oculto -->
         </div>
         <br>
@@ -193,56 +168,53 @@
           </mat-select>
         </mat-form-field>
       </div>
-        <button class="butonStyle" style="margin-left: 45%; margin-top: 90px" id="enviarButton" >Enviar</button>
+        <button class="butonStyle" style="margin-left: 45%; margin-top: 90px" id="enviarButton" (click)="enviarPdf()">Enviar</button>
 
       </div>
     </div>
 
  </div>
  <div *ngIf="suasConsultas" class="borda-de-baixo">
-  <!--Cria um novo "Quadrado para cada medicamento"-->
-    <div  class="medicamento" >
-      <mat-form-field  class="aumentar">
-        <mat-label>Busque aqui</mat-label>
-        <input matInput (keyup)="applyFilterConsulas($event)" placeholder="Ex. dor de cabeça" #input>
-      </mat-form-field>
+  <div class="medicamento">
+    <mat-form-field class="aumentar">
+      <mat-label>Busque aqui</mat-label>
+      <input matInput (keyup)="applyFilterConsulas($event)" placeholder="Ex. dor de cabeça" #input>
+    </mat-form-field>
 
-      <table mat-table [dataSource]="dataSourceSuasConsultas" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSourceSuasConsultas" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="motivo">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.motivo }}</td>
+      </ng-container>
 
+      <!-- Weight Column -->
+      <ng-container matColumnDef="medico">
+        <th mat-header-cell *matHeaderCellDef>Médico</th>
+        <td mat-cell *matCellDef="let element">{{ element.medico }}</td>
+      </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="motivo">
-          <th mat-header-cell *matHeaderCellDef> Nome </th>
-       <td mat-cell *matCellDef="let element"> {{element.motivo}} </td>
-        </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Data da consulta</th>
+        <td mat-cell *matCellDef="let element">{{ element.data }}</td>
+      </ng-container>
 
-        <!-- Weight Column -->
-   <ng-container matColumnDef="medico">
-          <th mat-header-cell *matHeaderCellDef> Médico </th>
-          <td mat-cell *matCellDef="let element"> {{element.medico}} </td>
-        </ng-container>
+      <ng-container matColumnDef="hora">
+        <th mat-header-cell *matHeaderCellDef>Horário da consulta</th>
+        <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
+      </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="data">
-          <th mat-header-cell *matHeaderCellDef> Data da consulta </th>
-          <td mat-cell *matCellDef="let element"> {{element.data}} </td>
-        </ng-container>
-        <ng-container matColumnDef="hora">
-          <th mat-header-cell *matHeaderCellDef> Horário da consulta </th>
-          <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
-        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsSuasConsultas"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsSuasConsultas"></tr>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsSuasConsultas"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsSuasConsultas;"></tr>
-
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-        </tr>
-      </table>
-
-    </div>
+      <tr class="mat-row" *matNoDataRow style="margin-left: 15px;">
+        <td class="mat-cell"  colspan="4">Não foi encontrado nenhum resultado</td>
+      </tr>
+    </table>
+  </div>
 </div>
+
   </div>
 
 </body>

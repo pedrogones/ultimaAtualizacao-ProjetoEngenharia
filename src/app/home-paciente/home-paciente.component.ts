@@ -1,6 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { PacienteService } from '../services/paciente.service';
+import { Paciente } from '../pacientes/paciente';
+import { HistoricoMedico } from '../models/historicoMedico';
+import { ReceitasMedicas } from '../models/receitasMedicas';
+import { SuasConsultas } from '../models2/suasConsultas';
+import { Medico } from '../medico/medico';
 
 //aqui serão as info dos pdfs q o medico envia, os 3 campos que precisam conter, no mínimo
 export interface Prescricoes {
@@ -26,16 +32,10 @@ const PDFS_PRESCRITOS: Prescricoes[] = [
 export interface Consultas {
   motivo: string;
   medico: string;
-  data: string;
-  hora: string;
+  data: string; // Suponho que você deseja manter a data como uma string
+  hora: string; // Suponho que você deseja manter a hora como uma string
+  // Adicione os campos que deseja incluir aqui, se necessário
 }
-//popular o array com os campos que virão do banco de dados
-const SUAS_CONSULTAS: Consultas[] = [
-  {motivo: 'Preciso me examinar por conta da... gripe', medico: 'Mário Silva', data: '26/10/2022', hora: '08:00'},
-  {motivo: 'Preciso me examinar por conta da... o pé', medico: 'Ana Santos', data: '15/07/2021', hora: '08:00'},
-  {motivo: 'Preciso me examinar por conta da... dor de cabeça', medico: 'Carlos Ferreira', data: '03/05/2023', hora: '08:00'},
-  {motivo: 'Preciso me examinar por conta da... alergia', medico: 'Patricia Alves', data: '19/11/2020', hora: '08:00'},
- ];
 @Component({
   selector: 'app-home-paciente',
   templateUrl: './home-paciente.component.html',
@@ -50,25 +50,160 @@ export class HomePacienteComponent implements OnInit {
   suasConsultas:boolean=false;
   mostrarMedicamentos:boolean =false;
   exameUpload:boolean =false;
-
-  constructor(private sharedService: SharedService) {
-
+  medicoTypes: string[] = [];
+  selectedMedico!: string;
+  constructor(private sharedService: SharedService, private pacienteService: PacienteService) {
   }
-  medicoTypes: string[] = [
-    'Dr. João Silva',
-    'Dra. Maria Oliveira',
-    'Dr. Carlos Santos',
-    // esse array será o que vai ser puxado do banco de dados, aqui é mero exemplo
-  ];
-  selectedMedico: string = this.medicoTypes[0]; // Seleciona o primeiro médico por padrão
-
+  displayedColumnsSuasConsultas: string[] = ['motivo', 'medico', 'data', 'hora'];
+  dataSourceSuasConsultas = new MatTableDataSource<Consultas>(); // Usar a interface Consultas como tipo
+  paciente: Paciente = {
+    _id: 0, // Inicialize com um valor padrão ou deixe em branco
+    nomePaciente: '',
+    contatoPaciente: '',
+    dataNascPaciente: '',
+    cpf: '',
+    sexo: '',
+    endereco: '',
+    telCttEmergencia: '',
+    nomeCttEmergencia: '',
+  };
+  historico: HistoricoMedico={
+    idHistorico: 0,
+    idPaciente: '',
+    nomePaciente:'',
+    doencasAnteriores: '',
+    doencasCronicas: '',
+    alergias: '',
+    cirurgiasAnteriores: '',
+    medicacoesAtuais: '',
+    medicacoesAnteriores: ''
+  }
+  receitasMedicas: ReceitasMedicas={
+    nome: '',
+    url: '',
+    type: null,
+    size: 0,
+    paciente: undefined,
+    nomePaciente: null,
+    idPaciente: null,
+    pacienteDTO: null,
+    medico: undefined,
+    medicoDTO: {
+      idMedico: 0,
+      nomeMedico: '',
+      especialidadeMedico: '',
+      contatoMedico: ''
+    }
+  }
+  suasConsulta: SuasConsultas={
+    idConsulta: 0,
+    nomeMedico: '',
+    nomePaciente: '',
+    motivoConsulta: '',
+    dataConsulta: undefined,
+    statusConsulta: ''
+  }
+  medicosDisponiveis: Medico[] = [];
   ngOnInit(): void {
+    const pacienteId = 6; // Substitua pelo ID do paciente que você deseja buscar
+    this.pacienteService.pegarPorId(pacienteId).subscribe(
+      (paciente) => {
+        // Preencha os campos do paciente com os dados obtidos
+        this.paciente = paciente;
 
+        console.log('Dados do Paciente:', paciente);
+      },
+      (error) => {
+        console.error('Erro ao buscar paciente por ID:', error);
+      }
+    );
+    this.pacienteService.pegarHistorico(pacienteId).subscribe(
+      (historicoData) => {
+        if (historicoData.length > 0) {
+          this.historico = historicoData[0];
+          console.log('Dados do Histórico:', this.historico);
+        } else {
+          console.log('Histórico vazio para o paciente com ID:', pacienteId);
+        }
+      },
+      (error) => {
+        console.error('Erro ao buscar Histórico por ID:', error);
+      }
+    );
+
+    /*ta confuso
+    this.pacienteService.pegarReceitas(pacienteId).subscribe(
+      (receitasPdfs) => {
+        if (receitasPdfs.length > 0) {
+          this.receitasMedicas = receitasPdfs[0];
+          console.log('Receitas pdfs:', this.receitasMedicas);
+        } else {
+          console.log('pdf vazio para o paciente com ID:', pacienteId);
+        }
+      },
+      (error) => {
+        console.error('Erro ao buscar Pdfs por ID:', error);
+      }
+    );
+    */
+
+   this.pacienteService.suasConsultas(pacienteId).subscribe((data) => {
+    // Mapeie os dados para o tipo Consultas
+    const consultas: Consultas[] = data.map((item) => {
+      return {
+        motivo: item.motivoConsulta,
+        medico: item.nomeMedico,
+        data: item.dataConsulta.toString(), // Converta a data para string, se necessário
+        hora: item.statusConsulta, // Suponho que "statusConsulta" deveria ser "hora"
+      };
+    });
+    this.dataSourceSuasConsultas.data = consultas;
+  });
+  this.pacienteService.pegarMedicos().subscribe((medicosG) => {
+  // Mapeie os nomes dos médicos para o array medicoTypes
+  this.medicoTypes = medicosG.map((medico) => medico.nomeMedico);
+
+  // Seleciona o primeiro médico por padrão se houver algum médico na lista
+  if (this.medicoTypes.length > 0) {
+    this.selectedMedico = this.medicoTypes[0];
   }
+  console.log('Médicos Disponíveis:', this.medicosDisponiveis);
+});
+  }
+// Declaração da variável para armazenar o arquivo selecionado
+arquivoSelecionado: File | null = null;
+
+// Função para selecionar o arquivo
+selecionarArquivo(event: any) {
+  this.arquivoSelecionado = event.target.files[0];
+}
+
+// Função para enviar o arquivo PDF
+enviarPdf() {
+  const pacienteId = 6; // Substitua pelo ID do paciente logado
+
+  // Verifique se um arquivo foi selecionado
+  if (!this.arquivoSelecionado) {
+    console.error('Nenhum arquivo selecionado.');
+    return;
+  }
+  // Crie um objeto FormData para enviar o arquivo
+  const formData = new FormData();
+  // Adicione o arquivo ao objeto FormData com a chave "file"
+  formData.append('file', this.arquivoSelecionado);
+  // Realize a solicitação POST com o objeto FormData
+  this.pacienteService.uploadExamRecentes(pacienteId, formData).subscribe(
+    (resultado) => {
+      console.log('PDF enviado com sucesso:', resultado);
+      // Faça algo após o upload, como recarregar os dados ou exibir uma mensagem de sucesso.
+    },
+    (error) => {
+      console.error('Erro ao enviar o PDF:', error);
+    }
+  );
+}
   displayedColumnsPdfs: string[] = [ 'name', 'medico', 'data'];
   dataSourcePdfs = new MatTableDataSource(PDFS_PRESCRITOS);
-  displayedColumnsSuasConsultas: string[] = [ 'motivo', 'medico', 'data', 'hora'];
-  dataSourceSuasConsultas = new MatTableDataSource(SUAS_CONSULTAS);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -78,8 +213,6 @@ export class HomePacienteComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceSuasConsultas.filter = filterValue.trim().toLowerCase();
   }
-
-
   //função para lidar com as mudanças da div no feed
   onRadioChange(selectedOption: string) {
     // Quando um botão de rádio for alterado, desmarque os outros
@@ -127,62 +260,7 @@ export class HomePacienteComponent implements OnInit {
   redirectPerfilMedico() {
     this.sharedService.redirectPerfilMedico();
   }
-
-
-
-  /// preeencher os campos de html pelo ts - facilita quando puxar do banco de dados
-
-  //campos de informações do paciente que serão mostrados no perfil dele
-  nome = 'Maria'
-  sobrenome = 'Targino Gomes'
-  nascimento = '15 de abril de 1985'
-  sexo = 'Feminino'
-  endereco = 'Rua das Flores, 123, Bairro Primavera, João Pessoa'
-  //contato e emergencia
-  telefone = '(55) 5555-5555'
-  rg = '1234567'
-  numeroParaEmergencia = '(55) 4444-4445'
-  nomeContatoEmergencia = ' João Gomes (marido)'
-  //Histórico Medico pessoal
-  conMedica = ' Hipertensão'
-  alergias = 'Nenhumas conhecidas'
-  medUsoRegular = 'Losartana para controle da pressão arterial'
-
-  //meidcações pescritas ao paciente,
-  // pelo médico, que serão exibidas na tela:
-  medicamentos = [
-    //a nível de exemplo, criei uma tabela de medicamentos, contendo 3 medicamentos
-    {
-      nomeMedicamento: 'Atenolol',
-      dataPrescricao: '28 de setembro de 2023',
-      dosagem: '50 mg',
-      posologia: 'Tomar 1 comprimido por via oral a cada manhã.',
-      indicacoes: 'Tratamento da hipertensão arterial.'
-    },
-    {
-      nomeMedicamento: 'Dipirona',
-      dataPrescricao: '21 de agosto de 2023',
-      dosagem: '15 mg',
-      posologia: 'oral 3 vezes ao dia',
-      indicacoes: 'Tratar inflamações locais como dor de cabeça',
-    },
-    {
-      nomeMedicamento: 'Dramin',
-      dataPrescricao: '28 de setembro de 2023',
-      dosagem: '25 mg',
-      posologia: 'Tomar 1 comprimido por via oral 2 vezes ao dia',
-      indicacoes: 'Tratamento de enjoo ',
-    }
-  ];
   logOut(){
     this.sharedService.redirectHome()
   }
-
-  // listar aqui os campos do Prontuário do paciente:
-  //-> Antecendentes Médicos:
-  antecedente='Hipertensão arterial diagnosticada em 2010. Asma diagnosticada na infância, atualmente sob controle. Nenhuma alergia conhecida a medicamentos ou alimentos.'
-  medicamentosAtuais='Atenolol 50 mg, uma vez ao dia, para controle da pressão arterial. Losartana 100 mg, uma vez ao dia, para controle da pressão arterial.  Inalador de Salbutamol, conforme necessário, para alívio dos sintomas de asma.'
-  historicoMedico='Maria Targino Gomes realiza consultas médicas de rotina a cada seis meses com seu clínico geral para acompanhamento da hipertensão arterial e avaliação geral de saúde.'
-  examesRecentes='Exame de sangue realizado em 15/09/2023: para monitoramento dos níveis de glicose e lipídios no sangue. Radiografia do tórax realizada em 10/09/2023: para avaliação dos pulmões devido a sintomas respiratórios.'
-  observacoes='A paciente está comprometida com a adesão ao tratamento para hipertensão arterial e asma, tomando regularmente seus medicamentos e comparecendo às consultas de acompanhamento.'
-  }
+}

@@ -14,7 +14,7 @@
           style="margin-left: 20px;">Seus pacientes</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item *ngFor="let paciente of pacientes" (click)="redirectPerfilMeuPaciente(paciente)">
-            {{ paciente.name }} <!-- Exibe o nome do paciente -->
+            {{ paciente.nomePaciente }} <!-- Exibe o nome do paciente -->
           </button>
         </mat-menu>
       </div>

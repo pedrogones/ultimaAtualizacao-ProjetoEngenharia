@@ -44,14 +44,9 @@ export class PerfilPacienteComponent implements OnInit {
 
     if (this.pacienteSelecionado) {
       console.log(this.pacienteSelecionado); // Exibe o paciente selecionado no console para fins de depuração
-      this.nomePaciente = this.pacienteSelecionado.name; // Preenche informações do paciente com dados do objeto do paciente
-      this.idadePaciente = this.pacienteSelecionado.idade;
+      this.nomePaciente = this.pacienteSelecionado.nomePaciente;
       this.sexoPaciente = this.pacienteSelecionado.sexo;
-      this.rgPaciente = this.pacienteSelecionado.rg;
-      this.doencaPaciente = this.pacienteSelecionado.doencas;
-      this.alergiasPaciente = this.pacienteSelecionado.alergico;
-      this.historicoPaciente = this.pacienteSelecionado.historicoFamiliar;
-      this.url_img = this.pacienteSelecionado.url_img;
+      this.rgPaciente = this.pacienteSelecionado.cpf;
     } else {
       console.log("Paciente não encontrado"); // Lida com o caso em que o pacienteSelecionado é nulo ou indefinido
     }

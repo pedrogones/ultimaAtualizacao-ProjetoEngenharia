@@ -29,12 +29,9 @@ export class CadastrarInfoComponent implements OnInit {
 
     if (this.pacienteSelecionado) {
       // Preencha as informações do paciente com os dados do objeto do paciente
-      this.nomePaciente = this.pacienteSelecionado.name;
-      this.idadePaciente = this.pacienteSelecionado.idade;
+      this.nomePaciente = this.pacienteSelecionado.nomePaciente;
       this.sexoPaciente = this.pacienteSelecionado.sexo;
-      this.rgPaciente = this.pacienteSelecionado.rg;
-      this.doencaPaciente = this.pacienteSelecionado.doencas;
-      this.alergiasPaciente = this.pacienteSelecionado.alergico;
+      this.rgPaciente = this.pacienteSelecionado.cpf;
       console.log('Meu paciente: ' +this.nomePaciente)
     } else {
       console.log("Paciente não encontrado");
@@ -47,7 +44,7 @@ export class CadastrarInfoComponent implements OnInit {
       return false; // Retorna false quando todos os campos estiverem preenchidos
     }
   }
-  
+
   cadastrar() {
     if (this.verificaIsEmpty()) {
       this.sharedService.dialogConfirm('Preencha todos os campos', false);
@@ -55,7 +52,7 @@ export class CadastrarInfoComponent implements OnInit {
       this.sharedService.dialogConfirm('informações a cadastrar', true);
     }
   }
-  
+
 
   cancelar() {
    this.sharedService.redirectMeuPaciente(this.pacienteSelecionado)

@@ -62,7 +62,7 @@ horario: string | null = null;
     this.medicoService.listarMedicos().subscribe(
       (medicos: Medico[]) => {
         // Extraia os nomes dos médicos e armazene-os no medicosArray
-        this.medicosArray = medicos.map(medico => medico.nome);
+        this.medicosArray = medicos.map(medico => medico.nomeMedico);
         console.log(this.medicosArray.map.name)
       },
       (error: any) => {
@@ -70,8 +70,6 @@ horario: string | null = null;
       }
     );
   }
-
-
   medicosArray: string[] = []
   arrayMedicos: string[] = [
     'Dr. João Silva',
@@ -79,8 +77,6 @@ horario: string | null = null;
     'Dr. Carlos Santos',
     // esse array será o que vai ser puxado do banco de dados
   ];
-
-
   selectedMedico: string = this.arrayMedicos[0]; // Seleciona o primeiro médico por padrão
   agendarConsultaClick() {
     this.agendarConsulta = true;

@@ -106,96 +106,75 @@ export class HomeMedicoComponent implements OnInit {
   redirectListaDePacientes() {
     this.sharedService.redirectListaDePacientes(); // Redireciona para a página de lista de pacientes
   }
-
- // Use objetos Paciente compatíveis com a interface:
-pacientes: Paciente[] = [
-  {
-    _id: 'id-1',
-    name: "Pedro Targino Gomes",
-    usuario: 'usuario-1',
-    dataNascimento:'00000000',
-    idade: '30',
-    alergico: 'Alérgico a dipirona monohidratada',
-    doencas:'não há',
-    historicoFamiliar: 'Diabtes Tipo 1',
-    email: 'email-1',
-    rg: '12345-67',
-    sexo: "Masculino",
-    url_img:"pedroPaciente.png"
-  },
-  {
-    _id: 'id-1',
-    dataNascimento:'00000000',
-    name: "Arthur Vieira",
-    usuario: 'usuario-2',
-    idade: '38',
-    alergico: 'Alérgico a parecetamol',
-    doencas:'Hipertensão',
-    historicoFamiliar: 'Diabtes Tipo 1',
-    email: 'email-1',
-    rg: '12345-67',
-    sexo: "Masculino",
-    url_img:"arthurPaciente.png"
-  },
-  {
-    _id: 'id-2',
-    name: "João Victor",
-    dataNascimento:'00000000',
-    usuario: 'usuario-3',
-    idade: '28',
-    alergico: 'Não',
-    doencas: 'Asma',
-    historicoFamiliar: 'Nenhum histórico de doença',
-    email: 'email-3',
-    rg: '98765-43',
-    sexo: "Masculino",
-    url_img: "joaoPaciente.png"
-  },
-  {
-    _id: 'id-3',
-    name: "Cássio Vittori",
-    usuario: 'usuario-4',
-    idade: '35',
-    dataNascimento:'00000000',
-    alergico: 'Alérgico a penicilina',
-    doencas: 'Diabetes Tipo 2',
-    historicoFamiliar: 'Diabetes Tipo 1 e Hipertensão',
-    email: 'email-4',
-    rg: '56789-01',
-    sexo: "Masculino",
-    url_img: "cassioPaciente.png"
-  },
-  {
-    _id: 'id-4',
-    name: "Geraldo Ferreira",
-    usuario: 'usuario-5',
-    idade: '45',
-    dataNascimento:'00000000',
-    alergico: 'Não',
-    doencas: 'Hipertensão e Colesterol Alto',
-    historicoFamiliar: 'Nenhum histórico de doenças familiares',
-    email: 'email-5',
-    rg: '54321-98',
-    sexo: "Masculino",
-    url_img: "geraldoPaciente.png"
-  },
-  {
-    _id: 'id-5',
-    name: "Ícaro Oliveira",
-    usuario: 'usuario-6',
-    idade: '32',
-    alergico: 'Alérgico a amoxicilina',
-    doencas: 'Asma',
-    historicoFamiliar: 'Asma e Diabetes Tipo 2',
-    email: 'email-6',
-    rg: '12398-76',
-    sexo: "Masculino",
-    dataNascimento:'00000000',
-    url_img: "icaroPaciente.png"
-  }
-
-
-  ]; // Array de pacientes, meramente exemplar, será ta,bem puxado e populado do banco de dados
+  pacientes: Paciente[] = [
+    {
+      _id: 'id-1',
+      nomePaciente: "Pedro Targino Gomes",
+      contatoPaciente: 'usuario-1',
+      dataNascPaciente: '00000000',
+      cpf: '',
+      endereco: '',
+      sexo: "Masculino",
+      telCttEmergencia: '',
+      nomeCttEmergencia: '',
+    },
+    {
+      _id: 'id-2',
+      nomePaciente: "Arthur Vieira",
+      contatoPaciente: 'usuario-2',
+      dataNascPaciente: '00000000',
+      cpf: '',
+      endereco: '',
+      sexo: "Masculino",
+      telCttEmergencia: '',
+      nomeCttEmergencia: '',
+    },
+    {
+      _id: 'id-3',
+      nomePaciente: "João Victor",
+      contatoPaciente: 'usuario-3',
+      dataNascPaciente: '00000000',
+      cpf: '',
+      endereco: '',
+      sexo: "Masculino",
+      telCttEmergencia: '',
+      nomeCttEmergencia: '',
+    },
+    {
+      _id: 'id-4',
+      nomePaciente: "Cássio Vittori",
+      contatoPaciente: 'usuario-4',
+      dataNascPaciente: '00000000',
+      cpf: '',
+      endereco: '',
+      sexo: "Masculino",
+      telCttEmergencia: '',
+      nomeCttEmergencia: '',
+    },
+    {
+      _id: 'id-5',
+      nomePaciente: "Geraldo Ferreira",
+      contatoPaciente: 'usuario-5',
+      dataNascPaciente: '00000000',
+      cpf: '',
+      endereco: '',
+      sexo: "Masculino",
+      telCttEmergencia: '',
+      nomeCttEmergencia: '',
+    },
+    {
+      _id: 'id-6',
+      nomePaciente: "Ícaro Oliveira",
+      contatoPaciente: 'usuario-6',
+      dataNascPaciente: '00000000',
+      cpf: '',
+      endereco: '',
+      sexo: "Masculino",
+      telCttEmergencia: '',
+      nomeCttEmergencia: '',
+    }
+  ];
+  // Array de pacientes, meramente exemplar, será ta,bem puxado e populado do banco de dados
 
   redirectPront() {
     this.sharedService.redirectProntuarioCadastrado(); // Redireciona para a página de prontuário
