@@ -27,7 +27,7 @@ html, body{
   padding-right: 90px;
 }
 .bCadastrar{
-  background-color: #071b72;
+  background-color: #191847;
   color: #f5f4f4;
 }
 
@@ -43,21 +43,18 @@ html, body{
   }
 }
 .bEntrar {
-  color: #071b72;
+  color: #191847;
   border-width: 0.5px; /* Torna a borda do botão Entrar mais fina */
   background-color: #f5f4f4;
 }
 button {
   margin-right: 8px;
 }
-
-
 .bEntrar::before {
   content: ""; /* Cria um elemento pseudo antes do conteúdo do botão */
   background-image: url(./assets/pessoa75.png);
   background-size: 35px 35px; /* Tamanho do ícone */
   border-radius: 100%;
-  background-color: #071b72;
   width: 35px;
   height: 35px;
   position: absolute;
@@ -65,25 +62,32 @@ button {
   right: 3px; /* Define a margem direita para posicionar o ícone */
   transform: translateY(-50%); /* Corrige a posição vertical do ícone */
 }
+ .bEntrar:hover{
+    color: #ffffff;
+    background-color: #191847;
+  }
+
+
+
 
 
 
 .inf-inicio{
-  color: rgb(25, 25, 117);
+  color:#191847;
   font-size: 20px;
   margin-left: 150px;
   cursor: pointer;
 }
 
 .inf-beneficios{
-  color: rgb(25, 25, 117);
+  color:#191847;
   font-size: 20px;
   margin-left: 45px;
   cursor: pointer;
 }
 
 .inf-depoimentos{
-  color: rgb(25, 25, 117);
+  color: #191847;
   font-size: 20px;
   margin-left: 45px;
   cursor: pointer;
@@ -91,7 +95,7 @@ button {
 
 .inf-inicio, .inf-beneficios, .inf-depoimentos {
   font-size: 16px;
-  color: rgb(25, 25, 117);
+  color: #191847;
   cursor: pointer;
   border-bottom: 2px solid transparent; /* Adiciona uma borda invisível no início */
   background-color: #dadada00;
@@ -99,7 +103,7 @@ button {
   &:hover {
       font-size: 20px;
       font-weight: bold;
-      border-bottom: 2px solid rgb(25, 25, 117); /* Adiciona a borda colorida ao passar o mouse */
+      border-bottom: 2px solid#191847; /* Adiciona a borda colorida ao passar o mouse */
     }
 }
 
@@ -114,7 +118,7 @@ button {
 
 .conteudo-inicio-texto{
   font-size:25px;
-  color: rgb(25, 25, 117);
+  color:#191847;
   padding-bottom: 30px;
 }
 
@@ -147,7 +151,7 @@ button {
 .quadrado-texto {
   font-weight:bold;
   font-size: 15px;
-  color: rgb(25, 25, 117);color: rgb(25, 25, 117);
+  color:#191847;color:#191847;
   float: left;
   width: 60%; /* Define o tamanho do texto (ajuste conforme necessário) */
   padding: 10px; /* Espaço ao redor do texto */
