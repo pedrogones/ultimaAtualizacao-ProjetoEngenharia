@@ -11,7 +11,7 @@ import { ConfirmationDialogComponent } from '../sharedDialog/confirmation-dialog
 export class VerificaMedicoComponent implements OnInit{
 
  // vamos manter um codigo de acesso padrao
- codigoPadrao = 'acessarUfpb'
+ codigoPadrao = 'clinicaSaude'
   codigo = '';
  ngOnInit(){
 

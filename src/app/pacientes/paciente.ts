@@ -1,5 +1,5 @@
 export interface Paciente {
-  _id:any;
+  idPaciente:number;
   nomePaciente: string;
   contatoPaciente: string;
   dataNascPaciente: string;

@@ -25,10 +25,13 @@
           <label>
             <mat-form-field class="input" required="" placeholder="Selecione um médico">
               <mat-label>Escolha um médico</mat-label>
-              <mat-select name="medico" [(ngModel)]="selectedMedico">
-                <mat-option *ngFor="let medico of arrayMedicos" [value]="medico">{{ medico }}</mat-option>
+              <mat-select name="medico" [(ngModel)]="selectedMedico" (ngModelChange)="onMedicoSelected($event)">
+                <mat-option *ngFor="let medico of arrayMedicos; let i = index" [value]="i">
+                  {{ medico }}
+                </mat-option>
               </mat-select>
             </mat-form-field>
+
           </label>
 
 

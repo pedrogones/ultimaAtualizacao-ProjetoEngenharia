@@ -90,14 +90,15 @@ export class CadastromedicoComponent {
     const medicoData:Medico={
       nomeMedico: this.nome,
       especialidadeMedico: this.especialidade,
-      contatoMedico: this.email
+      contatoMedico: this.email,
+      _id: 0
     }
     if (this.isValidForm()) {
       this.medicoService.cadastrarMedico(medicoData)
       .subscribe(
           (response) => {
-            console.log('Cadastro Médico realizado com sucesso:', response);
-            this.sharedService.dialogConfirm("Cadastro Médico realizado com sucesso:" + response, true)
+            console.log('Cadastro Médico realizado com sucesso');
+            this.sharedService.dialogConfirm("Cadastro Médico realizado com sucesso:" + this.nome, true)
             // Você pode redirecionar o usuário para outra página aqui, se necessário
           },
           (error) => {

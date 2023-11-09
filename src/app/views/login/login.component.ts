@@ -13,7 +13,7 @@ import { SharedService } from 'src/app/shared.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  usuarioDefault="pedrotargino";
+  usuarioDefault="cassiovittori";
   senhaDefault="123456";
   usuario!:string;
   senha!:string;

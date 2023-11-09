@@ -84,7 +84,7 @@ export class CadastroComponent {
 
   async fazerCadastro(): Promise<void> {
     const pacienteData: Paciente = {
-      _id: this.id,
+      idPaciente: this.id,
       nomePaciente: this.nome,
       endereco: this.enreco,  // Corrigido para "enreco"
       contatoPaciente: this.email,
@@ -97,10 +97,12 @@ export class CadastroComponent {
 
     if (this.isValidForm()) {
       this.pacienteService.cadastrarPaciente(pacienteData).subscribe(
-        (response) => {
+        async (response) => {
           console.log('Cadastro do Paciente realizado com sucesso:', response);
           this.sharedService.dialogConfirm('Cadastro do Paciente realizado com sucesso:' + response, true);
           // Você pode redirecionar o usuário para outra página aqui, se necessário
+          await this.sharedService.callDelay(2000)
+          this.sharedService.redirectHomePaciente();
         },
         (error) => {
           this.sharedService.dialogConfirm('Erro ao cadastrar o Paciente:' + error, false);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './sharedDialog/confirmation-dialog/confirmation-dialog.component';
 //import { MeuDialogComponent } from './views/meu-dialog/meu-dialog.component'; // Importe a classe do diálogo
@@ -12,6 +12,7 @@ import { ConfirmationDialogComponent } from './sharedDialog/confirmation-dialog/
 })
 
 export class SharedService {
+
   redirectNext(arg0: string) {
     this.router.navigate(['homeMedico/medicacoes'+arg0], { relativeTo: this.route });
   }
@@ -53,7 +54,7 @@ export class SharedService {
   redirectHomePaciente() {
     this.router.navigate(['homePaciente'], { relativeTo: this.route })
   }
-  redirectPerfilMedico() {
+  redirectPerfilMedico(_id: number) {
     this.router.navigate(['homePaciente/perfilMedico'], { relativeTo: this.route })
   }
   redirectProntuario1() {
