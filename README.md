@@ -1,5 +1,5 @@
 # ultimaAtualizacao-ProjetoEngenharia
-<strong>Projeto Executável apenas com integração com Banco de Dados<strong>
+<strong>Projeto Executável apenas com integração com Banco de Dados<strong><br>
 Partindo do ponto que ja temos o Maven e o Angular instalados
 
 No seu gerenciador de Arquivos:
