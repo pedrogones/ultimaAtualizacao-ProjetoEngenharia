@@ -6,6 +6,10 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { DisponibilidadeService } from './disponibilidade-service.service';
 import { Paciente } from '../pacientes/paciente';
 import { DatePipe } from '@angular/common';
+import { MedicoService } from '../services/medico.service';
+import { ModeloConsulta } from '../models3/modeloConsulta';
+import { Medico } from '../medico/medico';
+import { PacientesDoMedico } from '../models4/pacientePorMedico';
 
 @Component({
   selector: 'app-home-medico',
@@ -13,14 +17,87 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home-medico.component.scss']
 })
 export class HomeMedicoComponent implements OnInit {
+  medico:Medico={
+    _id: undefined,
+    nomeMedico: '',
+    especialidadeMedico: '',
+    contatoMedico: ''
+  }
+  meusPacientes: PacientesDoMedico[] = [];
+  pacientes: PacientesDoMedico[] = []
+  // Array de pacientes, meramente exemplar, será ta,bem puxado e populado do banco de dados
 
   ngOnInit() {
-    this.dataDoDia() ; // Isso irá calcular e atribuir a data do dia ao carregar a página
+    this.dataDoDia(); // Isso irá calcular e atribuir a data do dia ao carregar a página
+    this.carregarConsultas()
+    this.medicoService.listarMedicosById(this._idFixo).subscribe(
+      (medico) => {
+        // Preencha os campos do médico com os dados obtidos
+        this.medico = medico;
+        console.log('Dados do Médico:', medico);
+      },
+      (error) => {
+        console.error('Erro ao buscar médico por ID:', error);
+      }
+    );
+    this.medicoService.pegarSeusPacientes(this._idFixo).subscribe((pacientes)=>{
+      this.meusPacientes=this.filtrarPacientesUnicos(pacientes)
+      this.pacientes=this.filtrarPacientesUnicos(pacientes)
+      console.log('Dados dos Pacientes dps:', this.meusPacientes);
+      console.log("Pacientes no novo array:", this.pacientes)
+    },
+    (error) => {
+      console.error('Erro ao buscar pacientes por ID:', error);
+    }
+    );
   }
+  filtrarPacientesUnicos(pacientes: any): PacientesDoMedico[] {
+    const pacientesUnicos: PacientesDoMedico[] = [];
+    const nomesExistentes: Set<string> = new Set();
+
+    for (const paciente of pacientes) {
+      if (!nomesExistentes.has(paciente.nomePaciente)) {
+        nomesExistentes.add(paciente.nomePaciente);
+        pacientesUnicos.push(paciente);
+      }
+    }
+
+    return pacientesUnicos;
+  }
+
+
+horaFormatada=''
+  _idFixo=1
+  idPaciente!:number
+  carregarConsultas() {
+    const consultas: ModeloConsulta = {
+      idConsulta: 0,
+      nomeMedico: '',
+      nomePaciente: '',
+      motivoConsulta: '',
+      dataConsulta: '',
+      statusConsulta: ''
+    };
+
+    this.medicoService.verConsultasById(this._idFixo).subscribe(
+      (consultaMedico) => {
+        this.consultas = consultaMedico;
+        consultas.dataConsulta="12:00"
+        console.log('Suas consultas:', this.consultas); // Use this.consultas aqui
+      },
+      (error) => {
+        console.error('Erro ao buscar consultas pelo ID:' + this._idFixo, error);
+      }
+
+    );
+
+  }
+
+
 
   mostrarCardGerenciarConsultas = false; // Variável para controlar a exibição do card de gerenciar consultas
   disponibilidadeForm!: FormGroup;
-  constructor(private sharedService: SharedService, private formBuilder: FormBuilder, private pacienteService: PacienteService, private fb: FormBuilder, private disponibilidadeService: DisponibilidadeService) {
+  constructor(private medicoService: MedicoService,private sharedService: SharedService, private formBuilder: FormBuilder, private pacienteService: PacienteService, private fb: FormBuilder, private disponibilidadeService: DisponibilidadeService) {
     this.disponibilidadeForm = this.fb.group({
       dataSelecionada: [null],
       disponibilidade: this.fb.array([])
@@ -35,6 +112,7 @@ export class HomeMedicoComponent implements OnInit {
   dataDoDia() {// Calcula a data do dia atual
     this.carregarConsultasDoDia(); // Carrega as consultas para o dia atual
   }
+
 
   carregarConsultasDoDia() {
     // Lógica para criar um array de consultas para o dia atual (exemplo didático)
@@ -106,75 +184,6 @@ export class HomeMedicoComponent implements OnInit {
   redirectListaDePacientes() {
     this.sharedService.redirectListaDePacientes(); // Redireciona para a página de lista de pacientes
   }
-  pacientes: Paciente[] = [
-    {
-      _id: 'id-1',
-      nomePaciente: "Pedro Targino Gomes",
-      contatoPaciente: 'usuario-1',
-      dataNascPaciente: '00000000',
-      cpf: '',
-      endereco: '',
-      sexo: "Masculino",
-      telCttEmergencia: '',
-      nomeCttEmergencia: '',
-    },
-    {
-      _id: 'id-2',
-      nomePaciente: "Arthur Vieira",
-      contatoPaciente: 'usuario-2',
-      dataNascPaciente: '00000000',
-      cpf: '',
-      endereco: '',
-      sexo: "Masculino",
-      telCttEmergencia: '',
-      nomeCttEmergencia: '',
-    },
-    {
-      _id: 'id-3',
-      nomePaciente: "João Victor",
-      contatoPaciente: 'usuario-3',
-      dataNascPaciente: '00000000',
-      cpf: '',
-      endereco: '',
-      sexo: "Masculino",
-      telCttEmergencia: '',
-      nomeCttEmergencia: '',
-    },
-    {
-      _id: 'id-4',
-      nomePaciente: "Cássio Vittori",
-      contatoPaciente: 'usuario-4',
-      dataNascPaciente: '00000000',
-      cpf: '',
-      endereco: '',
-      sexo: "Masculino",
-      telCttEmergencia: '',
-      nomeCttEmergencia: '',
-    },
-    {
-      _id: 'id-5',
-      nomePaciente: "Geraldo Ferreira",
-      contatoPaciente: 'usuario-5',
-      dataNascPaciente: '00000000',
-      cpf: '',
-      endereco: '',
-      sexo: "Masculino",
-      telCttEmergencia: '',
-      nomeCttEmergencia: '',
-    },
-    {
-      _id: 'id-6',
-      nomePaciente: "Ícaro Oliveira",
-      contatoPaciente: 'usuario-6',
-      dataNascPaciente: '00000000',
-      cpf: '',
-      endereco: '',
-      sexo: "Masculino",
-      telCttEmergencia: '',
-      nomeCttEmergencia: '',
-    }
-  ];
-  // Array de pacientes, meramente exemplar, será ta,bem puxado e populado do banco de dados
 
   redirectPront() {
     this.sharedService.redirectProntuarioCadastrado(); // Redireciona para a página de prontuário
@@ -188,7 +197,7 @@ export class HomeMedicoComponent implements OnInit {
     this.sharedService.redirectVerMedicacoes()
   }
   // Função para definir o paciente selecionado e redirecionar para a tela do paciente
-  redirectPerfilMeuPaciente(paciente: Paciente) {
+  redirectPerfilMeuPaciente(paciente: any) {
     this.pacienteService.setPacienteSelecionado(paciente);
     const nomePaciente = this.pacienteService.getPacienteNome(); // Chame o método get para obter o nome
     console.log("TESTE: "+nomePaciente);

@@ -1,59 +1,47 @@
 <body>
 
-  <section class="sEsquerda">
-
-      <div class="card">
-          <div class="card-border-top"></div>
-          <div class="imagem">
-              <img [src]="url_img" alt="imagem do paciente">
-              <button (click)="redirectHomeMedico()">Voltar</button>
-          </div>
-        </div>
-
-  </section>
-
   <section class="sDireita">
       <h2>Informações pessoais</h2>
       <label for="nome" class="labels nome"><strong>Nome do Paciente: {{nomePaciente}}</strong></label>
-      <label for="idade" class="labels idade"><strong>Idade: {{idadePaciente}} anos</strong></label>
-      <label for="sexo" class="labels sexo"><strong>Sexo: {{sexoPaciente}} </strong></label>
-      <label for="rg" class="labels rg"><strong>Rg: {{rgPaciente}} </strong></label>
-      <h2>informações médicas</h2>
-      <label class="labels" for="doenca"><strong>Doença: {{doencaPaciente}} </strong></label>
-      <label class="labels" for="alergia"><strong>Alergias: {{alergiasPaciente}} </strong></label>
-      <label class="labels" for="historico-familiar"><strong>Histórico familiar: {{historicoPaciente}} </strong></label>
-      <button (click)="cadstrarInformacoes()">Alterar Informações</button>
+      <label for="idade" class="labels idade"><strong>Data de Nascimento: {{dataNascPaciente}}</strong></label>
+      <label for="sexo" class="labels sexo"><strong>Sexo: {{sexo}}</strong></label>
+      <label for="rg" class="labels rg"><strong>CPF: {{cpf}}</strong></label>
+      <h2>Informações médicas</h2>
+      <label class="labels" for="doenca"><strong>Doenças Anteriores: {{infoAddTaked.doencasAnteriores}}</strong></label>
+      <label class="labels" for="doenca"><strong>Doenças Crônicas: {{infoAddTaked.doencasCronicas}}</strong></label>
+      <label class="labels" for="alergia"><strong>Alergias: {{infoAddTaked.alergias}}</strong></label>
+      <label class="labels" for="cirurgia"><strong>Cirurgias Anteriores: {{infoAddTaked.cirurgiasAnteriores}}</strong></label>
+      <label class="labels" for="medicacao-atual"><strong>Medicações Atuais: {{infoAddTaked.medicacoesAtuais}}</strong></label>
+      <label class="labels" for="medicacao-anterior"><strong>Medicações Anteriores: {{infoAddTaked.medicacoesAnteriores}}</strong></label>
+
+      <div style="display: flex; ">
+        <button class="submit" (click)="cadstrarInformacoes()">Alterar Informações</button>
+        <button class="submit" (click)="redirectHomeMedico()">Voltar</button>
+      </div>
+
 
   </section>
   <section class="sDireita">
-    <h2>Histórico médico</h2>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <h2>Histórico de Exames</h2>
+<table mat-table [dataSource]="dataSourceHistorico" class="mat-elevation-z8">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef="tipoExame">
-        <th mat-header-cell *matHeaderCellDef> Exame </th>
-        <td mat-cell *matCellDef="let element"> {{element.tipoExame}} </td>
-      </ng-container>
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef="medico">
-        <th mat-header-cell *matHeaderCellDef> Médico </th>
-        <td mat-cell *matCellDef="let element"> {{element.medico}} </td>
-      </ng-container>
-    
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="data">
-        <th mat-header-cell *matHeaderCellDef> Data </th>
-        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    
+  <!-- Nome do Exame -->
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef> Nome do Exame </th>
+    <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+  </ng-container>
+
+  <!-- URL -->
+  <ng-container matColumnDef="url">
+    <th mat-header-cell *matHeaderCellDef> URL </th>
+    <td mat-cell *matCellDef="let element"><a href=" {{element.url}}">Clique aqui para baixa-lo</a></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsHistorico"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsHistorico;"></tr>
+</table>
+
+
   </section>
 
 </body>

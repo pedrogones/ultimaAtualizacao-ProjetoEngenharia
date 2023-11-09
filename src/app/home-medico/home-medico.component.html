@@ -3,7 +3,7 @@
   <section class="parte-de-cima">
     <div class="inf-inicial">
       <p class="nome" style="font-size:15px"><strong>Olá, bem vindo ao seu perfil médico</strong></p>
-      <label for="nome" class="nome"><strong>{{nomeMedico}} </strong></label>
+      <label for="nome" class="nome"><strong>{{medico.nomeMedico}} </strong></label>
     </div>
     <div class="botoes">
       <button class="butonStyle" id="bReceita" (click)="redirectEnviarReceita()">Enviar Receita</button>
@@ -40,9 +40,9 @@
         <div class="card__content" style="justify-content: center;">
           <div class="div-gerenciaA textFormat">
             <p style="margin-left:32%;">Consultas de Hoje - dia: {{ dateToday | date: 'dd/MM/yyyy' }}</p>
-            <ul class="lista" style="margin-left:40%;">
+            <ul class="lista">
               <li *ngFor="let consulta of consultas">
-                {{ consulta.data | date: 'HH:mm' }} - {{ consulta.paciente }}
+                {{ consulta.data | date: 'HH:mm' }} - {{ consulta.nomePaciente }} - motivo: {{consulta.motivoConsulta}} - às {{consulta.dataConsulta}}
               </li>
             </ul>
           </div>
@@ -53,10 +53,9 @@
   </section>
   <section class="parte-de-baixo">
     <div>
-      <label for="nome">Nome: {{nomeMedico}}</label>
-      <label for="idade">Idade: {{idadeMedico}}</label>
-      <label for="area-de-atuacao">Área de atuação: {{areaAtuacao}}</label>
-      <label for="area-de-atuacao">Informações pessoais: {{infoPessoais}}</label>
+      <label for="nome">Nome: {{medico.nomeMedico}}</label>
+      <label for="area-de-atuacao">Área de atuação: {{medico.especialidadeMedico}}</label>
+      <label for="area-de-atuacao">Contato do Médico: {{medico.contatoMedico}}</label>
     </div>
   </section>
 </body>

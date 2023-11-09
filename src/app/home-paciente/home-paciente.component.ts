@@ -7,26 +7,14 @@ import { HistoricoMedico } from '../models/historicoMedico';
 import { ReceitasMedicas } from '../models/receitasMedicas';
 import { SuasConsultas } from '../models2/suasConsultas';
 import { Medico } from '../medico/medico';
+import { Router, ActivatedRoute } from '@angular/router';
 
 //aqui serão as info dos pdfs q o medico envia, os 3 campos que precisam conter, no mínimo
 export interface Prescricoes {
   name: string;
   medico: string;
-  data: string;
+  url: string;
 }
-//popular o array com os campos que virão do banco de dados
-const PDFS_PRESCRITOS: Prescricoes[] = [
-  {name: 'Remedio para gripe', medico: 'Mário Silva', data: '26/10/2022'},
-  {name: 'Remedio para o pé', medico: 'Ana Santos', data: '15/07/2021'},
-  {name: 'Remedio para dor de cabeça', medico: 'Carlos Ferreira', data: '03/05/2023'},
-  {name: 'Remedio para alergia', medico: 'Patricia Alves', data: '19/11/2020'},
-  {name: 'Remedio para tosse', medico: 'Ricardo Rodrigues', data: '07/09/2022'},
-  {name: 'Remedio para enjoo', medico: 'Isabel Ribeiro', data: '14/12/2021'},
-  {name: 'Remedio para dor nas costas', medico: 'Paulo Gonçalves', data: '22/08/2023'},
-  {name: 'Remedio para insônia', medico: 'Sandra Lima', data: '30/04/2019'},
-  {name: 'Remedio para dor de estômago', medico: 'João Martins', data: '12/03/2022'},
-  {name: 'Remedio para febre', medico: 'Mariana Sousa', data: '08/06/2020'}
-];
 
 //aqui serão as info dos pdfs q o medico envia, os 3 campos que precisam conter, no mínimo
 export interface Consultas {
@@ -52,12 +40,18 @@ export class HomePacienteComponent implements OnInit {
   exameUpload:boolean =false;
   medicoTypes: string[] = [];
   selectedMedico!: string;
-  constructor(private sharedService: SharedService, private pacienteService: PacienteService) {
+
+  constructor(private router: Router, private route: ActivatedRoute, private sharedService: SharedService, private pacienteService: PacienteService) {
   }
+  //pega as inf de consultas do apciente e joga nesses arrays>
   displayedColumnsSuasConsultas: string[] = ['motivo', 'medico', 'data', 'hora'];
   dataSourceSuasConsultas = new MatTableDataSource<Consultas>(); // Usar a interface Consultas como tipo
+//pega as receitas do paciente e joga nesse array:
+displayedColumnsPdfs: string[] = ['name', 'medico', 'url'];
+  dataSourcePdfs = new MatTableDataSource<Prescricoes>();
+
   paciente: Paciente = {
-    _id: 0, // Inicialize com um valor padrão ou deixe em branco
+    idPaciente: 0, // Inicialize com um valor padrão ou deixe em branco
     nomePaciente: '',
     contatoPaciente: '',
     dataNascPaciente: '',
@@ -78,22 +72,10 @@ export class HomePacienteComponent implements OnInit {
     medicacoesAtuais: '',
     medicacoesAnteriores: ''
   }
-  receitasMedicas: ReceitasMedicas={
-    nome: '',
-    url: '',
-    type: null,
-    size: 0,
-    paciente: undefined,
-    nomePaciente: null,
-    idPaciente: null,
-    pacienteDTO: null,
-    medico: undefined,
-    medicoDTO: {
-      idMedico: 0,
-      nomeMedico: '',
-      especialidadeMedico: '',
-      contatoMedico: ''
-    }
+  receitasMedicas: Prescricoes={
+    name: '',
+    medico: '',
+    url: ''
   }
   suasConsulta: SuasConsultas={
     idConsulta: 0,
@@ -103,9 +85,10 @@ export class HomePacienteComponent implements OnInit {
     dataConsulta: undefined,
     statusConsulta: ''
   }
+  idFixo:number=2;
   medicosDisponiveis: Medico[] = [];
   ngOnInit(): void {
-    const pacienteId = 6; // Substitua pelo ID do paciente que você deseja buscar
+    const pacienteId = this.idFixo; // Substitua pelo ID do paciente que você deseja buscar
     this.pacienteService.pegarPorId(pacienteId).subscribe(
       (paciente) => {
         // Preencha os campos do paciente com os dados obtidos
@@ -117,6 +100,8 @@ export class HomePacienteComponent implements OnInit {
         console.error('Erro ao buscar paciente por ID:', error);
       }
     );
+    console.log(pacienteId);
+
     this.pacienteService.pegarHistorico(pacienteId).subscribe(
       (historicoData) => {
         if (historicoData.length > 0) {
@@ -131,23 +116,31 @@ export class HomePacienteComponent implements OnInit {
       }
     );
 
-    /*ta confuso
-    this.pacienteService.pegarReceitas(pacienteId).subscribe(
-      (receitasPdfs) => {
-        if (receitasPdfs.length > 0) {
-          this.receitasMedicas = receitasPdfs[0];
-          console.log('Receitas pdfs:', this.receitasMedicas);
-        } else {
-          console.log('pdf vazio para o paciente com ID:', pacienteId);
-        }
-      },
-      (error) => {
-        console.error('Erro ao buscar Pdfs por ID:', error);
-      }
-    );
-    */
+   // Defina as colunas e o dataSource para as receitas
 
-   this.pacienteService.suasConsultas(pacienteId).subscribe((data) => {
+// Faça a solicitação para pegar as receitas
+this.pacienteService.pegarReceitas(pacienteId).subscribe(
+  (receitasPdfs) => {
+    // Mapeie os dados para o tipo Prescricoes
+    const receitas: Prescricoes[] = receitasPdfs.map((item) => {
+      return {
+        name: item.nome, // Nome da receita
+        medico: item.medicoDTO.nomeMedico, // Nome do médico
+        url: item.url, // URL do PDF
+      };
+    });
+
+    // Preencha o dataSource com as receitas mapeadas
+    this.dataSourcePdfs.data = receitas;
+  },
+  (error) => {
+    console.error('Erro ao buscar receitas por ID:', error);
+  }
+);
+
+
+
+   this.pacienteService.suasConsultas(this.idFixo).subscribe((data) => {
     // Mapeie os dados para o tipo Consultas
     const consultas: Consultas[] = data.map((item) => {
       return {
@@ -180,7 +173,7 @@ selecionarArquivo(event: any) {
 
 // Função para enviar o arquivo PDF
 enviarPdf() {
-  const pacienteId = 6; // Substitua pelo ID do paciente logado
+  const pacienteId = 21; // Substitua pelo ID do paciente logado
 
   // Verifique se um arquivo foi selecionado
   if (!this.arquivoSelecionado) {
@@ -193,8 +186,11 @@ enviarPdf() {
   formData.append('file', this.arquivoSelecionado);
   // Realize a solicitação POST com o objeto FormData
   this.pacienteService.uploadExamRecentes(pacienteId, formData).subscribe(
-    (resultado) => {
+    async (resultado) => {
       console.log('PDF enviado com sucesso:', resultado);
+      await this.sharedService.dialogConfirm("Seu exame anterior foi enviado com sucesso", true);
+      this.exameUpload=false;
+      this.inicio=true;
       // Faça algo após o upload, como recarregar os dados ou exibir uma mensagem de sucesso.
     },
     (error) => {
@@ -202,9 +198,6 @@ enviarPdf() {
     }
   );
 }
-  displayedColumnsPdfs: string[] = [ 'name', 'medico', 'data'];
-  dataSourcePdfs = new MatTableDataSource(PDFS_PRESCRITOS);
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourcePdfs.filter = filterValue.trim().toLowerCase();
@@ -258,7 +251,7 @@ enviarPdf() {
   }
   //funcão para redirecionar ao perfil do seu médico
   redirectPerfilMedico() {
-    this.sharedService.redirectPerfilMedico();
+this.sharedService.redirectPerfilMedico(this.idFixo)
   }
   logOut(){
     this.sharedService.redirectHome()

@@ -1,23 +1,26 @@
-*{
+* {
   margin: 0;
+  height: auto;
   padding: 0;
   border: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
+body {
+  height: auto;
   display: flex;
   flex-direction: row;
   background-color: rgba(128, 128, 128, 0.24);
 }
-.labels{
+
+.labels {
   width: 90%;
 }
 
-section{
+section {
   width: 50%;
-  height: 100vh;
+  min-height: 100vh; // Substituído "height" por "min-height"
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,16 +30,34 @@ section{
   background-color: white;
 }
 
-.sDireita{
+.sDireita {
   margin-left: 25px;
 }
 
-.sEsquerda{
+.sEsquerda {
   margin-right: 25px;
   justify-content: center;
 }
 
-.sDireita h2{
+.submit {
+  border: none;
+  outline: none;
+  background-color: #191847;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: 0.3s ease;
+  padding: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #0f0f2c;
+}
+
+.sDireita h2 {
   margin-bottom: 35px;
   margin-top: 30px;
   border-radius: 5px;
@@ -47,15 +68,23 @@ section{
   text-align: center;
 }
 
-.sDireita label{
+.sDireita label {
   min-width: 50%;
   max-width: 70%;
   padding: 5px;
   padding-left: 0;
   margin: 10px;
+  border-bottom: 1px solid #000000;
+  background: transparent;
+}
 
- border-bottom: 1px solid #000000;
- background: transparent;
+/* Adicionado estilo para as novas labels */
+.labels[for="doenca-cronica"],
+.labels[for="doenca"],
+.labels[for="cirurgia"],
+.labels[for="medicacao-atual"],
+.labels[for="medicacao-anterior"] {
+  width: 70%;
 }
 
 .card {
@@ -64,36 +93,35 @@ section{
   background: #00005c;
   border-radius: 15px;
   box-shadow: 1px 5px 60px 0px #100a886b;
- }
+}
 
- .card .card-border-top {
+.card .card-border-top {
   width: 60%;
   height: 3%;
   background: #4E4EC2;
   margin: auto;
   border-radius: 0px 0px 15px 15px;
- }
+}
 
- .imagem{
+.imagem {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
- }
+}
 
-
- .sEsquerda img{
+.sEsquerda img {
   margin-top: -50px;
   background-color: none;
   width: 38vh;
   height: 38vh;
   border-radius: 100%;
   border: 2px solid white;
- }
+}
 
- .sEsquerda button{
+.sEsquerda button {
   color: white;
   margin-top: 60px;
   padding: 8px;
@@ -104,8 +132,9 @@ section{
   background-color: #4E4EC2;
   cursor: pointer;
   transition: 0.3s;
- }
- button{
+}
+
+button {
   color: white;
   border: 1px solid #00005c;
   border-radius: 10px;
@@ -114,11 +143,12 @@ section{
   background-color: #4E4EC2;
   cursor: pointer;
   transition: 0.3s;
- }
- button:hover{
-  background-color: #4e4ec26c;
- }  
+}
 
- .sEsquerda button:hover{
+button:hover {
   background-color: #4e4ec26c;
- }
+}
+
+.sEsquerda button:hover {
+  background-color: #4e4ec26c;
+}

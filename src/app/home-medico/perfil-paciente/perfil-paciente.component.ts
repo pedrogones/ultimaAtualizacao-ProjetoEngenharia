@@ -1,21 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PacienteService } from 'src/app/pacienteService'; // Importa o serviço para acessar o objeto do paciente
+import { MatTableDataSource } from '@angular/material/table';
+import { PacienteService } from 'src/app/pacienteService';
 import { Paciente } from 'src/app/pacientes/paciente';
+import { MedicoService } from 'src/app/services/medico.service';
+import { HistoricoExames } from 'src/app/models5/historicoExames';
+import { InfoAdd } from 'src/app/models4/infoAdd';
 import { SharedService } from 'src/app/shared.service';
 
-export interface DadosPDF {
-  tipoExame: string;
-  medico: string;
-  data: string;
-}
-
-const PDF_DATA: DadosPDF[] = [
-    { tipoExame: 'Pressão arterial', medico: 'Dr. Smith', data: '2023-11-04' },
-    { tipoExame: 'Dor de barriga', medico: 'Dra. Johnson', data: '2023-11-05' },
-    { tipoExame: 'Exame de sangue', medico: 'Dr. Brown', data: '2023-11-06' },
-    { tipoExame: 'Raio-X do pé', medico: 'Dra. Davis', data: '2023-11-07' },
-    { tipoExame: 'Exame de urina', medico: 'Dr. Wilson', data: '2023-11-08' }
-];
 @Component({
   selector: 'app-perfil-paciente',
   templateUrl: './perfil-paciente.component.html',
@@ -23,39 +14,106 @@ const PDF_DATA: DadosPDF[] = [
 })
 
 export class PerfilPacienteComponent implements OnInit {
-  pacienteSelecionado: Paciente | null = null; // Variável para armazenar o objeto do paciente selecionado
-  public nomePaciente!: string; // Variáveis para armazenar informações do paciente
-  public idadePaciente!: string;
-  public sexoPaciente!: string;
-  public rgPaciente!: string;
-  public doencaPaciente!: string;
-  public alergiasPaciente!: string;
-  public historicoPaciente!: string;
-  public url_img!: string;
+  pacienteSelecionado: Paciente | null = null;
+  nomePaciente: string = '';
+  idPaciente: number = 0;
+  contatoPaciente: string = '';
+  dataNascPaciente: string = '';
+  cpf: string = '';
+  sexo: string = '';
+  endereco: string = '';
+  telCttEmergencia: string = '';
+  nomeCttEmergencia: string = '';
 
-  constructor(private pacienteService: PacienteService, private sharedService: SharedService) {} // Injeta o serviço de paciente
+  infoAddTaked: InfoAdd = {
+    idHistorico: 0,
+    idPaciente: 0,
+    doencasAnteriores: '',
+    doencasCronicas: '',
+    alergias: '',
+    cirurgiasAnteriores: '',
+    medicacoesAtuais: '',
+    medicacoesAnteriores: ''
+  };
 
-  displayedColumns: string[] = ['tipoExame', 'medico', 'data'];
-  dataSource = PDF_DATA; // Array de dados de exame em formato DadosPDF
+  displayedColumnsHistorico: string[] = ['nome','url'];
+  dataSourceHistorico = new MatTableDataSource<HistoricoExames>();
+
+  constructor(
+    private pacienteService: PacienteService,
+    private sharedService: SharedService,
+    private medicoService: MedicoService
+  ) {}
 
   ngOnInit() {
-    // Recupere o paciente selecionado do serviço
     this.pacienteSelecionado = this.pacienteService.getPacienteSelecionado();
-
     if (this.pacienteSelecionado) {
-      console.log(this.pacienteSelecionado); // Exibe o paciente selecionado no console para fins de depuração
       this.nomePaciente = this.pacienteSelecionado.nomePaciente;
-      this.sexoPaciente = this.pacienteSelecionado.sexo;
-      this.rgPaciente = this.pacienteSelecionado.cpf;
+      this.idPaciente = this.pacienteSelecionado.idPaciente;
+      this.contatoPaciente = this.pacienteSelecionado.contatoPaciente;
+      this.dataNascPaciente = this.pacienteSelecionado.dataNascPaciente || '';
+      this.cpf = this.pacienteSelecionado.cpf || '';
+      this.sexo = this.pacienteSelecionado.sexo || '';
+      this.endereco = this.pacienteSelecionado.endereco || '';
+      this.telCttEmergencia = this.pacienteSelecionado.telCttEmergencia || '';
+      this.nomeCttEmergencia = this.pacienteSelecionado.nomeCttEmergencia || '';
     } else {
-      console.log("Paciente não encontrado"); // Lida com o caso em que o pacienteSelecionado é nulo ou indefinido
+      console.log('Paciente não encontrado');
     }
+
+    this.medicoService.pegarInfoAdd(this.idPaciente).subscribe(
+      (pegandoInfo) => {
+        if (Array.isArray(pegandoInfo) && pegandoInfo.length > 0) {
+          this.infoAddTaked = pegandoInfo[pegandoInfo.length - 1];
+        } else {
+          console.error('A lista de informações está vazia ou não é um array válido.');
+        }
+      },
+      (error) => {
+        console.error('Erro ao buscar info ADD:', error);
+      }
+    );
+
+    this.medicoService.historicoExames(this.idPaciente).subscribe(
+      (historico) => {
+        const historicoArray: HistoricoExames[] = historico.map((item: any) => {
+          return {
+            nome: item.nome,
+            url: item.url,
+            type: item.type || null,
+            size: item.size || 0,
+            paciente: null,
+            nomePaciente: null,
+            idPaciente: null,
+            pacienteDTO: {
+              idPaciente: item.pacienteDTO?.idPaciente || 0,
+              nomePaciente: item.pacienteDTO?.nomePaciente || null,
+              dataNascPaciente: item.pacienteDTO?.dataNascPaciente || null,
+              cpf: item.pacienteDTO?.cpf || null,
+              sexo: item.pacienteDTO?.sexo || null,
+              endereco: item.pacienteDTO?.endereco || null,
+              telCttEmergencia: item.pacienteDTO?.telCttEmergencia || null,
+              nomeCttEmergencia: item.pacienteDTO?.nomeCttEmergencia || null,
+              contatoPaciente: item.pacienteDTO?.contatoPaciente || null,
+              exames: item.pacienteDTO?.exames || null
+            },
+            medico: null,
+            medicoDTO: null
+          };
+        });
+        this.dataSourceHistorico.data = historicoArray;
+      },
+      (error) => {
+        console.error('Erro ao buscar Histórico', error);
+      }
+    );
   }
 
   redirectHomeMedico() {
     this.sharedService.redirectHomeMedico();
   }
-  cadstrarInformacoes(){
-    this.sharedService.redirectCadInfoPaciente(this.pacienteSelecionado)
+
+  cadstrarInformacoes() {
+    this.sharedService.redirectCadInfoPaciente(this.pacienteSelecionado);
   }
 }

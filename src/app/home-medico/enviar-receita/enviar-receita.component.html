@@ -16,10 +16,20 @@
         <p style="margin-left: 25%;">(O documento deve estar assinado pelo responsável)</p>
         <div class="botoes">
           <!-- Outros botões existentes -->
-          <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;">
+          <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;" accept=".pdf" (change)="selecionarArquivo($event)">
+
           <!-- Input de arquivo PDF oculto -->
         </div>
         <br>
+        <mat-form-field style="width: 52%; height: 100px;" class="input" required="" placeholder="Selecione um médico">
+          <mat-label>Enviar para o paciente</mat-label>
+          <mat-select name="paciente" [(value)]="selectedPacienteObject">
+            <mat-option *ngFor="let paciente of meusPacientes" (click)="logSelectedPaciente()" [value]="{ id: paciente.idPaciente, nome: paciente.nomePaciente }">
+              {{ paciente.nomePaciente }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-form-field style="width: 52%;">
           <mat-label>Envie alguma observação(opcional):</mat-label>
           <textarea matInput [(ngModel)]="observacoes"></textarea>

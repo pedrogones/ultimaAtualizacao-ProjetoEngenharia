@@ -15,7 +15,7 @@
         <label for="radioMostrarMedicamentos">
           <input type="radio" name="radio" id="radioMostrarMedicamentos" [(ngModel)]="mostrarMedicamentos" [value]="'mostrarMedicamentos'"
             (change)="onRadioChange('mostrarMedicamentos')">
-          <span>Medicamentos prescritos</span>
+          <span>Receitas Médicas</span>
         </label>
         <label for="radioExameUploa">
           <input type="radio" name="radio" id="radioExameUploa" [(ngModel)]="exameUpload" [value]="'exameUpload'"
@@ -58,7 +58,7 @@
             <br>
             Sexo: {{paciente.sexo}}
             <br>
-            Endereço residencial: {{paciente.endereco}}
+            Endereço residencial: rua joarene - mangabeira
           </p>
         </form>
 
@@ -70,7 +70,7 @@
             Cpf: {{paciente.cpf}} <br>
             Contato de emergência:<br>
             Nome: {{paciente.nomeCttEmergencia}} <br>
-            Numero: {{paciente.telCttEmergencia}}</p>
+            Numero:  1234-5678</p>
         </form>
       </div>
 
@@ -105,43 +105,42 @@
    </div>
    <div *ngIf="mostrarMedicamentos" class="borda-de-baixo">
     <!--Cria um novo "Quadrado para cada medicamento"-->
-      <div  class="medicamento" >
-        <mat-form-field  class="aumentar">
-          <mat-label>Busque aqui</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. João silva" #input>
-        </mat-form-field>
+      <!-- Cria um novo "Quadrado para cada medicamento" -->
+<div class="medicamento">
+  <mat-form-field class="aumentar">
+    <mat-label>Busque aqui</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. João silva" #input>
+  </mat-form-field>
 
-        <table mat-table [dataSource]="dataSourcePdfs" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSourcePdfs" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
 
+    <!-- Médico Column -->
+    <ng-container matColumnDef="medico">
+      <th mat-header-cell *matHeaderCellDef>Médico</th>
+      <td mat-cell *matCellDef="let element">{{element.medico}}</td>
+    </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Nome </th>
-         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
+    <!-- URL do PDF Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>URL do PDF</th>
+      <td mat-cell *matCellDef="let element"> <a href="{{element.url}}">{{element.url}}</a></td>
+    </ng-container>
 
-          <!-- Weight Column -->
-     <ng-container matColumnDef="medico">
-            <th mat-header-cell *matHeaderCellDef> Médico </th>
-            <td mat-cell *matCellDef="let element"> {{element.medico}} </td>
-          </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsPdfs"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsPdfs;"></tr>
 
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="data">
-            <th mat-header-cell *matHeaderCellDef> Data de prescrição </th>
-            <td mat-cell *matCellDef="let element"> {{element.data}} </td>
-          </ng-container>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="3">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+</div>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsPdfs"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumnsPdfs;"></tr>
-
-          <!-- Row shown when there is no matching data. -->
-          <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-          </tr>
-        </table>
-
-      </div>
   </div>
   <div *ngIf="exameUpload" class="borda-de-baixo">
     <div class="card__content" style="justify-content: center;">

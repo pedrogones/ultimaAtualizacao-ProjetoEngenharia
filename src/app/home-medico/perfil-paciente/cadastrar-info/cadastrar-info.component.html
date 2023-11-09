@@ -8,39 +8,54 @@
 <body>
     <section class="parteDeCima">
         <h1>Histórico do paciente {{nomePaciente}} </h1>
-        
+
     </section>
 
     <section class="parteDeBaixo">
-        <form class="form">
-            <p class="title">Registrar</p>
-            <p class="message">Cadastre o histórico do paciente de forma fácil e rápida </p>
-                <div class="flex">
-            </div>  
-                    
-            <label>
-              <input required="" placeholder="" type="text" class="input" [(ngModel)]="antecedentesMedicos" name="antecedentesMedicos">
-              <span>Antecedentes Médicos</span>
-            </label>
-            
-            <label>
-              <input required="" placeholder="" type="text" class="input" [(ngModel)]="medicamentosUsoAtual" name="medicamentosUsoAtual">
-              <span>Medicamento atual em uso</span>
-            </label>
-          
-            <label>
-              <input required="" placeholder="" type="text" class="input" [(ngModel)]="historicoPacienteCad" name="historicoPacienteCad">
-              <span>Histórico de consultas médicas</span>
-            </label>
-          
-            <label>
-              <input required="" placeholder="" type="text" class="input" [(ngModel)]="observacoes" name="observacoes">
-              <span>Observações</span>
-            </label>
+      <form class="form">
+        <p class="title">Registrar</p>
+        <p class="message">Cadastre o histórico do paciente de forma fácil e rápida</p>
+        <div class="flex"></div>
 
-            <button class="submit" (click)="cadastrar()">Cadastrar</button>
-            <button class="submit" (click)="cancelar()">Cancelar</button>
-        </form>
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="doencasAnteriores" name="doencasAnteriores">
+          <span>Doenças Anteriores</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="doencasCronicas" name="doencasCronicas">
+          <span>Doenças Crônicas</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="alergias" name="alergias">
+          <span>Alergias</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="cirurgiasAnteriores" name="cirurgiasAnteriores">
+          <span>Cirurgias Anteriores</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="medicacoesAtuais" name="medicacoesAtuais">
+          <span>Medicações Atuais</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="medicacoesAnteriores" name="medicacoesAnteriores">
+          <span>Medicações Anteriores</span>
+        </label>
+
+        <label>
+          <input required="" placeholder="" type="text" class="input" [(ngModel)]="observacoes" name="observacoes">
+          <span>Observações</span>
+        </label>
+
+        <button class="submit" (click)="cadastrar()">Cadastrar</button>
+        <button class="submit" (click)="cancelar()">Cancelar</button>
+      </form>
+
     </section>
 
 
