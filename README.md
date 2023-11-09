@@ -4,7 +4,7 @@ Partindo do ponto que ja temos o Maven e o Angular instalados
 
 No seu gerenciador de Arquivos:
 crie uma pasta chamada ProjetoEngenharia, após, abra-o na tua IDE
-abra no powerShell como adm(ou tu logo concede permissão para criar/editar as pastas no teu doretório, pq vai ficar dando erro de permissão quando for criar projetos angular) entre no caminho da sua pasta ProjetoEngenharia
+abra no powerShell como adm(ou tu logo concede permissão para criar/editar as pastas no teu diretório, pq vai ficar dando erro de permissão quando for criar projetos angular) entre no caminho da sua pasta ProjetoEngenharia
 para conceder a permissaão use:
 icacls "C:\Users\pedro\ProjetoEngenharia" /grant "pedro:(OI)(CI)F"
 
